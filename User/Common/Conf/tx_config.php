@@ -1,0 +1,1 @@
+<?php	return array ( 'txstatus' => '1', 'txthemin' => '100', 'txrate' => '0', 'txthemax' => '10000', 'txthebeishu' => '100', 'jl_start' => '500', 'jl_e' => '10000', 'jl_beishu' => '500', 'tj_start' => '500', 'tj_e' => '10000', 'tj_beishu' => '500', 'submit' => '提交', );?>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 fluid top-full sidebar sidebar-full sticky-sidebar"> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 fluid top-full sticky-top sidebar sidebar-full sticky-sidebar"> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9 fluid top-full sticky-top sidebar sidebar-full sticky-sidebar"> <![endif]-->
+<!--[if gt IE 8]> <html class="ie gt-ie8 fluid top-full sticky-top sidebar sidebar-full sticky-sidebar"> <![endif]-->
+<!--[if !IE]><!--><html><!-- <![endif]-->
+<head>
+
+
+<script type="text/javascript" src="/bitStyle/js/jquery.js"></script>
+<script type="text/javascript" src="/bitStyle/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/bitStyle/js/modernizr.js"></script>
+<script type="text/javascript" src="/bitStyle/js/selectivizr.js"></script>
+<script type="text/javascript" src="/bitStyle//js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/bitStyle/js/scripts.js"></script>
+<script type="text/javascript" src="/bitStyle/js/remaining.js"></script>
+<script type="text/javascript" src="/bitStyle/js/fn_number_format.js"></script>
+<script type="text/javascript" src="/bitStyle/js/9acba5c0d35076a1ccd574dfc21b8b2b.js"></script>
+        <script type="text/javascript">
+            var _gNow = new Date();
+            
+            setInterval(function(){
+                $.ajax({
+                    url: '?aj=1&type=check_login',
+                    data: {'uid': 82662186},
+                    dataType: 'json',
+                    error: function(){},
+                    success: function(data){
+                        if(data.loggedout == '1'){
+                            window.location.href = "/bitStyle/zh-CN/";
+                        }
+                    }
+                })
+            }, 300000); //5min
+        </script>
+        
+		
+<script type="text/javascript">
+jQuery(document).ready(function($){
+});
+</script>
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	var gdBtn = $('#gdBtn');
+	var pdBtn = $('#pdBtn');
+	
+	pdBtn.click(function(){
+		$(this).toggleClass('active');
+		gdBtn.removeClass('active');
+		$('#pdWrap').stop(true, false).slideToggle('fast');
+		$('#gdWrap').stop(true, false).slideUp('fast').removeClass('open');
+		return false;
+	});
+	// if user status is freeze or just unblock and not yet do the maintain
+	gdBtn.click(function(){
+		$(this).toggleClass('active');
+		pdBtn.removeClass('active');
+		$('#gdWrap').stop(true, false).slideToggle('fast');
+		$('#pdWrap').stop(true, false).slideUp('fast').removeClass('open');
+		return false;
+	});
+		
+	// Tooltips
+	$('.tip').tooltip({placement: 'top'});
+	$('.tipr').tooltip({placement: 'right'});
+	$('.tipb').tooltip({placement: 'bottom'});
+	$('.tipl').tooltip({placement: 'left'});
+	
+	$("a[href='#top']").click(function() {
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		return false;
+	});
+	
+	var _server_time = new Date(),
+        _server_time2 = new Date(),
+        _local_time = new Date(),
+        _local_time2 = new Date();
+        _server_time2 = new Date(),
+        _local_time = new Date(),
+        _local_time2 = new Date();
+	
+	_timer = setInterval(function(){
+		var now = new Date();
+		true_elapsed = Math.round((now.getTime() - _gNow.getTime()) / 1000); 		//synchronize & increment 1 second
+		second = _local_time.getTime() + 1000;
+		elapsed = Math.round((second - _local_time2.getTime()) / 1000);
+		if(elapsed < true_elapsed){
+			diff = true_elapsed - elapsed;
+			second += (diff * 1000);
+		}
+		_local_time.setTime(second);
+		second = _server_time.getTime() + 1000;
+		elapsed = Math.round((second - _server_time2.getTime()) / 1000);
+		if(elapsed < true_elapsed){
+			diff = true_elapsed - elapsed;
+			second += (diff * 1000);
+		}
+		_server_time.setTime(second);
+		
+		//update server time
+		date_text = padNumber(_server_time.getHours())+':'+padNumber(_server_time.getMinutes())+':'+padNumber(_server_time.getSeconds());
+		date_text += ' ' + _server_time.getDate()+'/'+(_server_time.getMonth()+1)+'/'+_server_time.getFullYear();
+		$('#server_time_text').html(date_text);
+		//update local time
+		date_text = padNumber(_local_time.getHours())+':'+padNumber(_local_time.getMinutes())+':'+padNumber(_local_time.getSeconds());
+		date_text += ' ' + _local_time.getDate()+'/'+(_local_time.getMonth()+1)+'/'+_local_time.getFullYear();
+		$('#local_time_text').html(date_text);
+	}, 1000);
+	
+	/**
+	* @param number An integer
+	* @return Integer padded with a 0 if necessary
+	*/
+	function padNumber(number) {
+		return (number >= 0 && number < 10) ? '0' + number : number;
+	}
+});
+</script>
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	var _allsecs = new Array();
+	var _allsecs2 = new Array();
+	var _i18n = {
+		weeks: ['星期', '星期'],
+		days: ['天', '天'],
+		hours: ['小时', '小时'],
+		minutes: ['分', '分'],
+		seconds: ['秒', '秒']
+	};
+	$('.maintain_remain_time').each(function(){
+		var _rid = $(this).attr('id');
+		var _seconds = parseInt($(this).attr('rel'));
+		if(_seconds > 0){
+			$(this).html(
+				remaining.getString(_seconds, _i18n, false)
+			);
+		}
+		else{
+			$(this).html('剩余0天');
+		}
+		_allsecs[_rid] = _seconds;
+		_allsecs2[_rid] = _seconds;
+	});
+	timer = setInterval(function(){
+		var now = new Date();
+		true_elapsed = Math.round((now.getTime() - _gNow.getTime()) / 1000); 		$('.maintain_remain_time').each(function(){
+			var _rid = $(this).attr('id');
+			if(typeof _allsecs[_rid] == 'undefined'){
+				_allsecs[_rid] = parseInt($(this).attr('rel'));
+			}
+			_seconds = _allsecs[_rid];
+			if(typeof _allsecs2[_rid] == 'undefined'){
+				_allsecs2[_rid] = parseInt($(this).attr('rel'));
+			}
+			//synchronize
+			_diff_sec = _allsecs2[_rid] - _seconds;
+			if(_diff_sec < true_elapsed){
+				_seconds = _allsecs2[_rid] - true_elapsed;
+			}
+			if(_seconds > 0){
+				$(this).html(
+					remaining.getString(_seconds, _i18n, false)
+				);
+				_allsecs[_rid] = --_seconds;
+			}
+			else{
+				$("#too_many_user").hide();
+				$("#login_btn").removeAttr("disabled");
+				$(this).html('剩余0天');
+			}
+		});
+	}, 1000);
+});
+</script>
+
+<script type="text/javascript">
+
+</script>
+
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	var pin_message = "此次执行需要{quantity}PIN。";
+		$('#maintain_back_btn, #pd_back_btn, #gd_back_btn').click(function(){
+		$('input[name=__req]').val('start'); //back to starting step
+	});
+	
+	if("0"){
+		$("#pd_pin").text(pin_message.replace("{quantity}", parseInt(0 / 0.5)));
+	}else{
+		$("#pd_pin").text(pin_message.replace("{quantity}", 1));
+	}
+	
+	$("input[name=from_wallet]").change(function(){
+		if($(this).val() == 'cwallet'){
+			$("#minimum_amount").text("BTC0.50000000");
+		}else{
+			$("#minimum_amount").text("BTC0.50000000");
+		}
+	});
+	
+	$("#show_pd_amount").html(format_monetary_value(0));
+	$("#show_gd_amount").html(format_monetary_value(0));
+	
+	$("#pd_amount").keyup(function(){
+		$("#show_pd_amount").html(format_monetary_value($(this).val()));
+		if($(this).val() > 0.5 && $(this).val() % 0.5 == 0){
+			$("#pd_pin").text(pin_message.replace("{quantity}", $(this).val() / 0.5));
+		}else{
+			$("#pd_pin").text(pin_message.replace("{quantity}", 1));
+		}
+	});
+	$("#gd_amount").keyup(function(){
+		$("#show_gd_amount").html(format_monetary_value($(this).val()));
+	});
+	
+	if(false){
+		$("#recalc-ep-message").text("您的额外回酬已计算。请稍候片刻再尝试。");
+		$("#recalc-ep-button").attr("disabled", "disabled");
+		setTimeout(function(){
+			$("#recalc-ep-button").removeAttr("disabled");
+			$("#recalc-ep-message").text("");
+		}, 0);
+	}
+	
+	$("#recalc-ep-button").on("click", function(e){
+		e.preventDefault();
+		$("#recalc-ep-message").text("您的额外回酬已计算成功。如果想再计算，请稍候片刻再尝试。");
+		$(this).attr("disabled", "disabled");
+		$.ajax({
+			url: '?aj=1&type=recalc_user_ep',
+			data: {'uid': 82662186},
+			type: 'post',
+			dataType: 'json',
+			error:function(data){
+				console.log(data);
+			},
+			success: function(data){
+				if(data.percent > 0){
+					$("#current_ep").html(data.percent);
+				}
+			}
+		});
+		setTimeout(function(){
+			$("#recalc-ep-button").removeAttr("disabled");
+			$("#recalc-ep-message").text("");
+		}, 1800000);
+	});
+});
+</script>
+<link rel="stylesheet" href="/bitStyle/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet" href="/bitStyle/css/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="/bitStyle/css/main.v001.css" type="text/css" />
+<link rel="stylesheet" href="/bitStyle/css/zh-CN.css" type="text/css" />
+<link rel="stylesheet" href="/bitStyle/css/fileupload.css" type="text/css" />
+
+
+<title>2016人均财富</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+
+
+<!-- Favicons -->
+<link rel="shortcut icon" href="/bitStyle/favicon.ico" type="image/x-icon">
+
+
+
+</head>
+<body class="zh-CN " id="">
+<script>
+  (function(i,s,o,g,r,a,m){i['google.hAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','google.js.js','ga');
+
+  ga('create', 'UA-65533920-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<include file="User/Home/View/default/common_header.html" />
+
+<div id="wrapper">
+<include file="User/Home/View/default/common_main.html" />
+
+<div class="row">
+    <div class="col-md-12">
+	<div class="panel panel-default">
+	    <div class="panel-body" style="background-color:#003d74; color:#FFFFFF">
+		<h4 class="font-light m-b-xs">完成任务，获得排单币。每天限完成一次!</h4>
+                <font style="font-size:14px;">
+		
+                    1、只有完成每日任务，才能获得排单币！<br>
+		    2、每个会员每天只能完成一次任务，完成后提交截图凭证，后台24小时内审核通过直接发放排单币。<br>
+		    3、收到排单币短信后，刷新页面，就可以进入首页“我要众筹投资”。每天最多排2单。<br><br>
+		    <p style="color:#ffff00;">TTB为了给所有会员制造一个公平公正稳定的平台，所有排单币都是人工审核发放，虽然这样的工作量很大，但这就是TTB控盘最严密的一道防线。最近平台发现有会员囤积排单币通过连续排单刷推荐奖和回报的作弊行为。平台已经监控到这样的现象，对于存在作弊嫌疑的帐号，TTB将延后其排单币的审核发放。</p>
+                </font>
+	    </div>
+	</div>
+    </div>
+    <div class="col-md-12 mb40">
+	<div class="row">
+	    
+	   <!-- <div class="col-md-12">
+		<div class="widget widget-body-white padding-none">
+		    <div class="widget-head">
+			<h4 class="heading">任务1-给TTB创业扶持基金捐款-可获一个排单币</h4>
+		    </div>
+		    <div class="widget-body">
+			<div class="p-sm">
+			    <p class="vertical-date text-success"><small>长期有效任务</small></p>
+			    <p>亲爱的家人们：</p>
+			    <p>还记得有不诚信玩家不打款，第一时间给你打款的“TTB创业扶持基金”吗？相信不少玩家收到过“TTB创业扶持基金”的打款。<br>
+			    创业扶持基金是保证TTB平台稳定、长久发展的关键。但是创业扶持基金的钱是哪里来的呢？<br>
+			    创业扶持基金由三部分组成：<br>
+			    1、TTB成立的时候，英国总部王子基金调拨了一笔费用在基金池里。<br>
+			    2、从TTB平台走出去并成功创富的创业者们对捐款给TTB创业扶持基金。<br>
+			    3、TTB家人们对平台默默的支持和捐赠。</p>
+			    <p>创业扶持基金属于每一个家人，是保证家人们的投资的关键，所以TTB工作人员在此感谢每一位对“TTB创业扶持基金”捐赠过的会员，谢谢大家贡献的力量。积小流可以成大河，你们的一分一元的捐赠，都是对家人们友爱和承担责任的表现，谢谢你们。<br><br>
+			    搜索TTB创业扶持基金的微信号：<font style="color:#ff0000; font-weight:bold; font-size:16px;">TTBjijin</font>(TTB基金) 并添加为好友，然后进行捐赠。<br>捐赠金额最少20元起，每天只能捐赠一次，不论金额大小都是1个排单币。<br>捐赠完成后直接索要排单币即可。</p>
+			</div>
+			<div class="panel-footer">
+			   本任务无需上传截图，请加微信号<font style="color:#ff0000; font-weight:bold; font-size:16px;">TTBjijin</font>(TTB基金)
+			</div>
+		    </div>
+		</div>
+	    </div>-->
+	    
+	    <div class="col-md-12">
+		<div class="widget widget-body-white padding-none">
+		    <div class="widget-head">
+			<h4 class="heading">任务1-转发朋友圈-可获1个排单币</h4>
+		    </div>
+		    <div class="widget-body">
+			<div class="p-sm">
+			    <p class="vertical-date text-success"><small>每日任务</small></p>
+		      <p>在你的朋友圈里转发一条和TTB我必爱相关的内容。您可以转发我们TTB众筹网站上的文章、项目，或者你自己的感受体会，或者转发其他TTB我必爱会员的朋友圈内容。<br>
+		        转发后截图上传提交凭证就可以了。<br>
+	          我们会在24小时内审核你的任务并给你发放排单币。<br>
+			  <span style="color:#FF0000">特别提醒：现在起，如果您没有上传截图凭证，没有真实转发朋友圈的，平台一概审核不通过不给发放排单币哦！</span></p>
+			    <p>我们希望每位会员都认真做任务，不作弊不敷衍。一旦发现有作弊行为或者转发后立刻删除的情况，帐号做冻结处理。</p>
+			    <!--<p>加TTB的客服微信号：<font style="color:#ff0000; font-weight:bold; font-size:16px;">TTBmiao</font>，你每天要做任务的时候，转发他朋友圈里最新的文章到你的朋友圈，然后截图上传提交凭证就可以了。我们会在24小时内审核你的任务并给你发放排单币。
+我们希望每位会员都认真做任务，不作弊不敷衍。一旦发现有作弊行为或者转发后立刻删除的情况，帐号做冻结处理。</p>
+			    <p><img alt="" src="/Public/0228.png"></p>-->
+			</div>
+			<div class="panel-footer">
+			   完成本任务，并上传提交截图凭证，可获得1个排单币。                               
+			</div>
+		    </div>
+		</div>
+	    </div>
+	    
+	    <div class="col-md-12">
+		<div class="widget widget-body-white padding-none">
+		    <div class="widget-head">
+			<h4 class="heading">任务2-录制视频-可获3个排单币</h4>
+		    </div>
+		    <div class="widget-body">
+			<div class="p-sm">
+			    <p class="vertical-date text-success"><small>长期有效任务</small></p>
+			    <p>扫描下面的二维码图片加TTB客服的微信，然后用手机录制一段收米分享视频，通过微信发给TTB客服。把聊天记录截图，然后上传提交凭证。我们会在24小时内审核你的任务并给你发放排单币。</p>
+			    <p><font color="#FF0000">视频中必须包含以下内容：1、我是TTB的会员某某某。2、我于某月某日顺利收米。3、我信赖TTB，我感谢TTB！4、聊一些你的心得和感受。</font></p>
+			    <p><img alt="" src="/Public/renwu.png"></p>
+			</div>
+			<div class="panel-footer">
+			   完成本任务，并上传提交截图凭证，可获得3个排单币。
+			</div>
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </div>
+    <div class="col-md-5 tablet-column-reset">
+	<div class="widget widget-body-white padding-none">
+	    <div class="widget-head">
+		<h4 class="heading">完成任务，提交凭证截图</h4>
+	    </div>
+	    <form class="form-horizontal margin-none" action="{:U('lxwmcl')}" enctype="multipart/form-data" name="xgmm" id="xgmm" method="post">
+		<div class="widget-body">
+		    <div class="form-group">
+			<label class="col-sm-3 control-label">选择任务</label>
+			<div class="col-sm-9">
+			    <select class="form-control m-b" name="otlylx" id="otlylx">
+				<option value="任务1">任务1</option>
+				<option value="任务2">任务2</option>
+			    </select>
+			</div>
+		    </div>
+
+		    <div class="form-group">
+			<label class="col-sm-3 control-label">执行结果</label>
+
+			<div class="col-sm-9">
+			    <input type="text" required="" name="lybt" id="lybt" value="我已完成任务" class="form-control">
+
+			</div>
+		    </div>
+			<div class="form-group">
+                <label class="col-md-3 control-label"><strong>上传截图凭证</strong></label>
+                <div class="col-md-9">
+                    <input type="file" name="pic" class="form-control">
+                </div>
+            </div>
+		    <div class="form-group">
+			<label class="col-sm-3 control-label">详细描述</label>
+			<div class="col-sm-9">
+			    <textarea rows="4" required="" name="lynr" id="lynr" class="form-control" style="width: 100%;">我已经完成该任务，并承诺任务真实有效，请管理员审核通过并发放排单币！</textarea>
+			</div>
+		    </div>
+		    <div class="text-center" style="position: relative;">
+		    <ul id="ul_pics" class="ul_pics clearfix"></ul>
+		    <p>必须上传截图凭证，任务才能通过审核！</p>
+			<input name="" class="btn btn-primary btn-sm" type="submit" id="btn" value="提交审核">	    
+			<div id="html5_1ah36hapgple1pf3f1na719pv3_container" class="moxie-shim moxie-shim-html5" style="position: absolute; top: 40px; left: 129px; width: 94px; height: 30px; overflow: hidden; z-index: 0;"><input id="html5_1ah36hapgple1pf3f1na719pv3" type="file" style="font-size: 999px; opacity: 0; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;" multiple="" accept="image/jpeg,image/png,image/gif,image/bmp,image/tiff"></div></div>
+		</div>
+	    </form>
+	</div>
+    </div>
+    <div class="col-md-7 tablet-column-reset">
+	<div class="widget widget-body-white padding-none">
+	    <div class="widget-head">
+		<h4 class="heading">排单币任务记录</h4>
+	    </div>
+	    <form class="form-horizontal margin-none" id="" method="post" action="/Home/Info/xgejmmcl.html">
+		<div class="widget-body">
+		    <div class="table-responsive">
+			<div id="example_wrapper" class="dataTables_wrapper no-footer">
+			    <table cellpadding="1" id="example" cellspacing="1" class="table table-bordered table-striped cus_datatable dataTable no-footer" role="grid" aria-describedby="example_info">
+				<thead>
+                <tr role="row"><th class="sorting_desc" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-sort="descending" aria-label="编号: activate to sort column ascending" style="width: 61px;">申请时间</th>
+                <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="时间: activate to sort column ascending" style="width: 61px;">任务结果</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="问题类别: activate to sort column ascending" style="width: 104px;">任务类别</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="发件人: activate to sort column ascending" style="width: 83px;">详细描述</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="状态: activate to sort column ascending" style="width: 62px;">审核时间</th><th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1" aria-label="操作: activate to sort column ascending" style="width: 62px;">审核结果</th></tr>
+            	</thead>
+				<tbody>
+					<if condition="count($list) gt 0">
+						<volist name="list" id="m">
+							<tr role="row" class="odd">
+								<td class="sorting_1">{$m.ma_time}</td>
+					<td>{$m.ma_theme}</td>
+					<td>{$m.ma_otherinfo}</td>
+					<td>{$m.ma_note}</td>
+					<td>{$m.ma_replytime}</td>
+					<td>{$m.ma_reply}</td>
+				    </tr>
+					</volist>
+					<else/>
+					<tr>
+						<td colspan="10">没有信息</td>
+					</tr>
+					</if>
+				    <!-- <tr role="row" class="odd">
+					<td class="sorting_1">2016-04-19 14:53:20</td>
+					<td>我已完成任务</td>
+					<td>任务1</td>
+					<td>我已经完成该任务，并承诺任务真实有效，请管理员审核通过并发放排单币！</td>
+					<td>2016-04-19 15:27:52</td>
+					<td><p>尊敬的TTB会员：</p><p>排单币已发放，请注意查收。</p></td>
+				    </tr><tr role="row" class="odd">
+					<td class="sorting_1">2016-04-18 18:56:51</td>
+					<td>我已完成任务</td>
+					<td>任务1</td>
+					<td>我已经完成该任务，并承诺任务真实有效，请管理员审核通过并发放排单币！</td>
+					<td>2016-04-18 19:12:34</td>
+					<td><p>尊敬的TTB会员：</p><p>排单币已发放，请注意查收。</p></td>
+				    </tr> -->				
+				</tbody>
+			</table>
+			    <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+			    	<div>     
+			    		{$page}
+			    	</div>
+			    </div>
+                </div>
+		    </div>
+		</div>
+	    </form>
+	</div>
+    </div>
+</div>
+
+
+
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+

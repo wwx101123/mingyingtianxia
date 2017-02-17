@@ -1,0 +1,234 @@
+[ 2017-02-15T11:43:29+08:00 ] 127.0.0.1 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001001s ]
+ERR: 无法加载模块:Favicon
+
+[ 2017-02-15T11:43:29+08:00 ] 127.0.0.1 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:Favicon
+
+[ 2017-02-15T11:44:05+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:49:37+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:49:37+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:49:41+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:49:41+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:49:52+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:49:55+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:06+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:06+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:09+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:09+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:12+08:00 ] 127.0.0.1 /bitStyle/js/fn/fn_nl2br.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:12+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:12+08:00 ] 127.0.0.1 /bitStyle/js/fn/fn_nl2br.js
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:12+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:14+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:14+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:16+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:16+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:50:50+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:51:10+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:51:29+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:51:35+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:51:45+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:53:22+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:53:22+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:53:22+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:53:28+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:54:17+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:54:17+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:54:22+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T11:54:32+08:00 ] 127.0.0.1 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:Favicon
+
+[ 2017-02-15T11:56:46+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T12:01:13+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T12:01:15+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T12:01:15+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+ERR: 无法加载模块:BitStyle
+
+[ 2017-02-15T12:01:16+08:00 ] 127.0.0.1 /bitStyle/images/logo_white.png
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+ERR: 无法加载模块:BitStyle
+

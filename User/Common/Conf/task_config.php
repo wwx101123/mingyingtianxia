@@ -1,0 +1,1 @@
+<?php	return array ( 'taskOn' => '1', 'submit' => '提交', );?>

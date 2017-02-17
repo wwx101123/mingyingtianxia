@@ -1,0 +1,1 @@
+<?php	return array ( 'lixi' => '50', 'fenqiday' => '3', 'daybenxi' => '10', 'monthbenxi' => '300', 'futou' => '0', 'tiqian_time' => '2', 'tiqian_lx' => '1', 'submit' => '提交', );?>

@@ -1,0 +1,124 @@
+<header class="header" id="top" role="header">
+	<div class="head_top">
+    	<div class="top_content">
+            <div class="left_text">欢迎来到2016人均财富！专业理财值得信赖。</div>
+            <div class="right_text"><a href="{:U('Index/reg')}">注册会员</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);"   id="opengg" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">查看公告</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="javascript:void(0);">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">帮助中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U('Index/messageInbox')}">问题提交</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="{:U('Reg/logout')}">退出平台</a></div>
+    	</div>
+    </div>
+    <div class="head_content">
+    	<div class="logo"> <a href="{:U('Index/index')}" class="navbar-brand">
+          <img src="/bitStyle/images/logo_white.png" alt="" >
+        </a></div>
+        <div class="tglj">
+        	 <label class="control-label" style="padding-top:5px; color:">推广链接:</label>
+             <input id="copy-num" class="form-control" type="text" value="{$tgurl}" style="max-width:300px;display:inline-block;color: #999;">
+             <button onclick="jsCopy()" type="button" class="btn btn-sm">复制</button>
+        </div>
+    </div>
+    <div class="head_nav">
+    	<div class="head_navbar">
+        	<ul id="MenuUl">
+            	<li class="MenuItem"><a href="/" style="color:#fff"><span class="glyphicon glyphicon-home"></span><span class="hidden-xs">网站首页</span></a></li>
+                <li class="MenuItem"><a href="{:U('Info/index')}" style="color:#fff"><span class="glyphicon glyphicon-pencil"></span><span class="hidden-xs">管理档案</span></a></li>
+                <li class="MenuItem"><a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff"><span class="glyphicon glyphicon-th-list"></span><span class="hidden-xs">帐户管理</span> <span class="caret"></span></a>
+                	
+            		<ul id="MenuItemChild">        
+					
+					  <li class="MenuItemChildItem" ><a href="{:U('Info/pin')}">排单币管理</a></li>
+					  <li class="MenuItemChildItem" ><a href="{:U('Info/pintopin')}">排单币转账</a></li>
+                      <li class="MenuItemChildItem" ><a href="{:U('Info/pai')}">激活码管理</a></li>
+                      <li class="MenuItemChildItem" ><a href="{:U('Info/paitopin')}">激活码转账</a></li>
+                      <li class="MenuItemChildItem" ><a href="{:U('Myuser/index')}">我的团队</a></li>
+                      <li class="MenuItemChildItem" ><a href="{:U('Myuser/xzzh')}">提供与得到记录</a></li>
+                      </ul>
+                   </li>
+            	</li>
+                <li class="MenuItem"><a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff"><span class="glyphicon glyphicon-list-alt"></span><span class="hidden-xs">交易记录</span> <span class="caret"></span></a>
+                	
+            		<ul id="MenuItemChild">
+                      <li  class="MenuItemChildItem"><a href="{:U('Info/pdhistory')}">提供帮助记录</a></li>
+                      <li  class="MenuItemChildItem"><a href="{:U('Info/gdhistory')}">接受帮助记录</a></li>
+                      <li  class="MenuItemChildItem"><a href="{:U('Info/rwhistory')}">提供帮助交易记录</a></li>
+                      <li class="MenuItemChildItem" ><a href="{:U('Info/cwhistory')}">推荐奖钱包记录</a></li>
+                      <li  class="MenuItemChildItem"><a href="{:U('Info/nwhistory')}">互助钱包记录</a></li>
+                    </ul>
+            	</li>
+                <li class="MenuItem"> <a href="{:U('Index/news')}" style="color:#fff"><span class="glyphicon glyphicon-file"></span><span class="hidden-xs">新闻中心</span><span class="badge"></span></a></li>
+                <li class="MenuItem"><a href="#" class="" data-toggle="dropdown" style="color:#fff"><span class="glyphicon glyphicon-usd"></span><span class="hidden-xs">我的钱包</span></a>
+                    <ul  id="MenuItemChild">
+                        <li class="MenuItemChildItem"><a href="javascript:void(0);">静态钱包&nbsp;&nbsp;<strong class="wallet-color"> {$log_money|default=0}RMB</strong></a></li>
+                        <li class="MenuItemChildItem"><a href="javascript:void(0);">领导奖钱包&nbsp;&nbsp;<strong class="wallet-color">{$ldx|default=0}RMB</strong></a></li>
+                        <li class="MenuItemChildItem"><a href="javascript:void(0);">推荐奖钱包&nbsp;&nbsp;<strong class="wallet-color">{$tjx|default=0}RMB</strong></a></li>
+                        <li class="MenuItemChildItem"><a href="javascript:void(0);">冻结钱包&nbsp;&nbsp;<strong class="wallet-color">{$userData.dongjie}RMB</strong></a></li>
+                    
+                  	</ul>
+               	</li>
+                <li class="MenuItem"><a href="" class="top-button" data-toggle="dropdown" style="color:#fff"><span class="glyphicon glyphicon-user top-button"></span><span class="hidden-xs">我的资料</span></a>
+                  <ul   id="MenuItemChild" >
+                    <li class="MenuItemChildItem"><a href="javascript:void(0);">编号&nbsp;&nbsp;<span class="count">{$userData['ue_id']|md5=###|substr=###,0,10} </span></a></li>
+                    <li class="MenuItemChildItem"><a href="javascript:void(0);">账号&nbsp;&nbsp;<span class="count">{$userData['ue_account']}</span></a></li>
+                    <li class="MenuItemChildItem"><a href="javascript:void(0);">手机号<span class="count">{$userData['ue_phone']}</span></a></li>
+                    <li class="MenuItemChildItem"><a href="javascript:void(0);">钱包<span class="count">{$userData['ue_money']}</span></a></li>
+                   	</ul>
+                </li>
+             </ul>
+        </div>
+    </div>
+</header>
+<script data-cfhash='f9e31' type="text/javascript">
+function jsCopy(){
+	var e=document.getElementById("copy-num");//对象是copy-num1
+	e.select(); //选择对象
+	document.execCommand("Copy"); //执行浏览器复制命令
+	alert("复制成功");
+}
+/* <![CDATA[ */
+!
+function() {
+try {
+  var t = "currentScript" in document ? document.currentScript: function() {
+	for (var t = document.getElementsByTagName("script"), e = t.length; e--;) if (t[e].getAttribute("data-cfhash")) return t[e]
+  } ();
+  if (t && t.previousSibling) {
+	var e, r, n, i, c = t.previousSibling,
+	a = c.getAttribute("data-cfemail");
+	if (a) {
+	  for (e = "", r = parseInt(a.substr(0, 2), 16), n = 2; a.length - n; n += 2) i = parseInt(a.substr(n, 2), 16) ^ r,
+	  e += String.fromCharCode(i);
+	  e = document.createTextNode(e),
+	  c.parentNode.replaceChild(e, c)
+	}
+	t.parentNode.removeChild(t);
+  }
+} catch(u) {}
+} ()
+/* ]]> */
+</script>
+<script src="/cssmmm/jquery.countdown.js"></script>
+<script>
+$(function(){
+  var isLook = '<?php echo session('islook'); ?>';
+  if(!isLook){
+    $("#opengg").click();
+  }
+});
+</script>
+<?php if(!session('islook')) session('islook',true); ?>
+  <!-- 公告 -->
+  <!-- Large modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">站点公告</h4>
+      </div>
+      <div class="modal-body">
+        {:C('gonggao')}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
