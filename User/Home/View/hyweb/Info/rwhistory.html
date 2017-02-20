@@ -18,7 +18,7 @@
 <script type="text/javascript" src="/bitStyle/js/9acba5c0d35076a1ccd574dfc21b8b2b.js"></script>
 		<script type="text/javascript">
 			var _gNow = new Date();
-			
+
 			setInterval(function(){
 				$.ajax({
 					url: '?aj=1&type=check_login',
@@ -33,13 +33,13 @@
 				})
 			}, 300000); //5min
 		</script>
-		
+
 
 <script type="text/javascript">
 jQuery(document).ready(function($){
 	var gdBtn = $('#gdBtn');
 	var pdBtn = $('#pdBtn');
-	
+
 	pdBtn.click(function(){
 		$(this).toggleClass('active');
 		gdBtn.removeClass('active');
@@ -55,18 +55,18 @@ jQuery(document).ready(function($){
 		$('#pdWrap').stop(true, false).slideUp('fast').removeClass('open');
 		return false;
 	});
-		
+
 	// Tooltips
 	$('.tip').tooltip({placement: 'top'});
 	$('.tipr').tooltip({placement: 'right'});
 	$('.tipb').tooltip({placement: 'bottom'});
 	$('.tipl').tooltip({placement: 'left'});
-	
+
 	$("a[href='#top']").click(function() {
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 		return false;
 	});
-	
+
 	var _server_time = new Date(),
         _server_time2 = new Date(),
         _local_time = new Date(),
@@ -74,7 +74,7 @@ jQuery(document).ready(function($){
         _server_time2 = new Date(),
         _local_time = new Date(),
         _local_time2 = new Date();
-	
+
 	_timer = setInterval(function(){
 		var now = new Date();
 		true_elapsed = Math.round((now.getTime() - _gNow.getTime()) / 1000); 		//synchronize & increment 1 second
@@ -92,7 +92,7 @@ jQuery(document).ready(function($){
 			second += (diff * 1000);
 		}
 		_server_time.setTime(second);
-		
+
 		//update server time
 		date_text = padNumber(_server_time.getHours())+':'+padNumber(_server_time.getMinutes())+':'+padNumber(_server_time.getSeconds());
 		date_text += ' ' + _server_time.getDate()+'/'+(_server_time.getMonth()+1)+'/'+_server_time.getFullYear();
@@ -102,7 +102,7 @@ jQuery(document).ready(function($){
 		date_text += ' ' + _local_time.getDate()+'/'+(_local_time.getMonth()+1)+'/'+_local_time.getFullYear();
 		$('#local_time_text').html(date_text);
 	}, 1000);
-	
+
 	/**
 	* @param number An integer
 	* @return Integer padded with a 0 if necessary
@@ -180,13 +180,13 @@ jQuery(document).ready(function($){
 		$('#maintain_back_btn, #pd_back_btn, #gd_back_btn').click(function(){
 		$('input[name=__req]').val('start'); //back to starting step
 	});
-	
+
 	if("0"){
 		$("#pd_pin").text(pin_message.replace("{quantity}", parseInt(0 / 0.5)));
 	}else{
 		$("#pd_pin").text(pin_message.replace("{quantity}", 1));
 	}
-	
+
 	$("input[name=from_wallet]").change(function(){
 		if($(this).val() == 'cwallet'){
 			$("#minimum_amount").text("BTC0.50000000");
@@ -194,10 +194,10 @@ jQuery(document).ready(function($){
 			$("#minimum_amount").text("BTC0.50000000");
 		}
 	});
-	
+
 	$("#show_pd_amount").html(format_monetary_value(0));
 	$("#show_gd_amount").html(format_monetary_value(0));
-	
+
 	$("#pd_amount").keyup(function(){
 		$("#show_pd_amount").html(format_monetary_value($(this).val()));
 		if($(this).val() > 0.5 && $(this).val() % 0.5 == 0){
@@ -209,7 +209,7 @@ jQuery(document).ready(function($){
 	$("#gd_amount").keyup(function(){
 		$("#show_gd_amount").html(format_monetary_value($(this).val()));
 	});
-	
+
 	if(false){
 		$("#recalc-ep-message").text("您的额外回酬已计算。请稍候片刻再尝试。");
 		$("#recalc-ep-button").attr("disabled", "disabled");
@@ -218,7 +218,7 @@ jQuery(document).ready(function($){
 			$("#recalc-ep-message").text("");
 		}, 0);
 	}
-	
+
 	$("#recalc-ep-button").on("click", function(e){
 		e.preventDefault();
 		$("#recalc-ep-message").text("您的额外回酬已计算成功。如果想再计算，请稍候片刻再尝试。");

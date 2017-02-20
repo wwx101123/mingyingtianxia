@@ -400,33 +400,17 @@
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr class="tac">
-                    <th>
-                      编号
-                    </th>
-                    <th>
-                      交易进度
-                    </th>
-                    <th>
-                      交易时间
-                    </th>
-                    <th>
-                      接受会员
-                    </th>
-                    <th>
-                      付款方式
-                    </th>
-                    <th>
-                      付款金额
-                    </th>
-                    <th>
-                      接受会员
-                    </th>
-                    <th>
-                      操作
-                    </th>
+                    <th> 编号 </th>
+                    <th> 交易进度 </th>
+                    <th> 交易时间 </th>
+                    <th> 接受会员 </th>
+                    <th> 付款方式 </th>
+                    <th> 付款金额 </th>
+                    <th> 接受会员 </th>
+                    <th> 操作 </th>
                   </tr>
                 </thead>
-                <tbody>
+
                   <volist name="plist" id="o">
                     <tr class="odd">
                       <td>
@@ -444,18 +428,8 @@
                         <br>
                         <p class="text-center">R{$o.id}</p>
                       </td>
-                      <td>
-                        <if condition="$o.zt eq 0">
-                          待付款
-                        </if>
-                        <if condition="$o.zt eq 1">
-                          已付款
-                        </if>
-                        <if condition="$o.zt eq 2">
-                          <font color="#017F01">
-                            交易成功
-                          </font>
-                        </if>
+                      <td>{$o.id|check_tgbz_status}
+
                       </td>
                       </td>
                       <td>

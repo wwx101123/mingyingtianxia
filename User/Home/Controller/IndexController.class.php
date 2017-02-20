@@ -52,11 +52,7 @@ class IndexController extends CommonController {
 
 public function home() {
 
-		//自动匹配
 
-		tgbz_automatch();
-		/*print_r($tgbz_automatch_list);
-		exit;*/
 
 		//////////////////----------
 		$User = M ( 'tgbz' ); // 实例化User对象
@@ -113,6 +109,7 @@ public function home() {
 		$p2 = getpage($count2,100);
 
 		$plist = $User->where ( $map2 )->order ( 'id DESC' )->limit ( $p2->firstRow, $p2->listRows )->select ();
+		//print_r($plist);
 		//$plist = array_merge($plist,$plist,$plist);
 		$this->assign ( 'plist', $plist ); // 赋值数据集
 		$this->assign ( 'page2', $p2->show() ); // 赋值分页输出

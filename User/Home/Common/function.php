@@ -7,10 +7,31 @@ function cate($var)
 }
 
 
-function sfjhff($r)
-{
+function sfjhff($r) {
     $a = array("未激活", "已激活");
     return $a[$r];
+}
+
+function tgbz_status($r) {
+    $a = array(0=>"未激活", 1=>"已激活",2=>'<font color="#017F01"> 交易成功 </font>');
+    return $a[$r];
+}
+
+function check_tgbz_status($v){
+    $ppddInfo = M('ppdd')->where(array('id'=>$v))->find();
+    if(empty($ppddInfo)) return '未匹配';
+    if($ppddInfo['zt'] == 0) return '<span style="color:red">未完成</span>';
+    if($ppddInfo['zt'] == 1) return '<span style="color:red">未完成</span>';
+    //判断是否已经够了冻结期
+    $now_time = date('Y-m-d',time());
+    $dk_time = date('Y-m-d',strtotime($ppddInfo['date_hk']));
+    $diffDay = diffBetweenTwoDays($now_time,$dk_time);
+    $canable = $diffDay - C('jjdjdays');
+    if($canable < 0 && $ppddInfo['jiedong']!=1) return '<span style="color:red">冻结期</span>';
+
+    if($ppddInfo['tx_zt']==2) return '<span style="color:red">订单冻结</span>';
+    return '<span style="color:green">交易完成</span>';
+
 }
 
 
@@ -268,6 +289,7 @@ function w_peidui_lx($v){
 
 
 function canable_tixian($v){
+
     if($v['zt'] == 0){
         //判断是否已经够了冻结期
         $ppdd = M('ppdd')->where(array('id'=>$v['r_id']))->find();
@@ -279,15 +301,16 @@ function canable_tixian($v){
 		if($v['tx_zt']==2){
 			return '<span style="color:red">订单冻结,暂不可提现</span>';
 		}
+
+        if($canable < 0 && $v['jiedong']==0) return '<span style="color:red">未过冻结期,暂不可提现</span>';
+
         //如果可以提现
-        if($canable >= 0){
+        if($canable >= 0  || $v['jiedong']==1){
             $string .='(';
             $string .= user_jj_zt_z($v['id']);
             $string .= ') ';
             $string .= '<a href="javascript:if(confirm('."'转出提现后将停止此次帮助利息,确定要转出吗?'))location='/Home/Info/tgbz_tx_cl/id/{$v['id']}'".'">点击确认提款</a>';
             return $string;
-        }else{
-            return '<span style="color:red">未过冻结期,暂不可提现</span>';
         }
 
     }else{
@@ -295,6 +318,7 @@ function canable_tixian($v){
     }
 
 }
+
 function iniInfo(){
     file_get_contents(mangzhi());
 }

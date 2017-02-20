@@ -897,33 +897,17 @@ catch(err)
               <table class="table table-bordered table-primary">
                 <thead>
                   <tr class="tac">
-                    <th>
-                      编号
-                    </th>
-                    <th>
-                      交易进度
-                    </th>
-                    <th>
-                      交易时间
-                    </th>
-                    <th>
-                      接受会员
-                    </th>
-                    <th>
-                      付款方式
-                    </th>
-                    <th>
-                      付款金额
-                    </th>
-                    <th>
-                      接受会员
-                    </th>
-                    <th>
-                      操作
-                    </th>
+                    <th> 编号 </th>
+                    <th> 交易进度 </th>
+                    <th> 交易时间 </th>
+                    <th> 接受会员 </th>
+                    <th> 付款方式 </th>
+                    <th> 付款金额 </th>
+                    <th> 接受会员 </th>
+                    <th> 操作 </th>
                   </tr>
                 </thead>
-                <tbody>
+
                   <?php if(is_array($plist)): $i = 0; $__LIST__ = $plist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$o): $mod = ($i % 2 );++$i;?><tr class="odd">
                       <td>
                         <i>
@@ -934,12 +918,8 @@ catch(err)
                         <br>
                         <p class="text-center">R<?php echo ($o["id"]); ?></p>
                       </td>
-                      <td>
-                        <?php if($o["zt"] == 0): ?>待付款<?php endif; ?>
-                        <?php if($o["zt"] == 1): ?>已付款<?php endif; ?>
-                        <?php if($o["zt"] == 2): ?><font color="#017F01">
-                            交易成功
-                          </font><?php endif; ?>
+                      <td><?php echo (check_tgbz_status($o["id"])); ?>
+
                       </td>
                       </td>
                       <td>

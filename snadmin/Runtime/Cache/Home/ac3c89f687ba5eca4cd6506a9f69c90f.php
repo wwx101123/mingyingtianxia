@@ -11,7 +11,7 @@ $(document).ready(function(){
   $(".click").click(function(){
   $(".tip").fadeIn(200);
   });
-  
+
   $(".tiptop a").click(function(){
   $(".tip").fadeOut(200);
 });
@@ -41,15 +41,15 @@ $(document).ready(function(){
     <li><a href="#">基本内容</a></li>
     </ul>
     </div>
-    
+
     <div class="rightinfo">
-    
+
     <div>
-    
+
     	<table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td> <form id="form1" name="form1" method="post" action="/shi.php/Home/Index/ppdd_list">
-	 
+
    <input name="user" type="text" class="dfinput" id="user" />
 	<input name="" type="submit" class="btn" value="确认搜索"/>
     &nbsp;&nbsp;&nbsp;
@@ -63,10 +63,10 @@ $(document).ready(function(){
   </tr>
 </table>
 
-    
+
     </div>
-    
-    
+
+
     <table class="tablelist">
     	<thead>
     	<tr>
@@ -82,22 +82,25 @@ $(document).ready(function(){
     	</tr>
         </thead>
         <tbody>
-		
-		<?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
-		 <td>R<?php echo ($v["id"]); ?></td>
-		 <td>P<?php echo ($v["p_id"]); ?></td>
-		  <td>
-		 G<?php echo ($v["g_id"]); ?>		  </td>
-		   <td><?php echo ($v["p_user"]); ?></td>
-		    <td><?php echo ($v["g_user"]); ?>		    </td>
-        
-        <td><?php echo ($v["jb"]); ?>		</td>
-        <td><?php if($v["zt"] == 0): ?>待付款<?php endif; ?>
-											<?php if($v["zt"] == 1): ?>已付款<?php endif; ?>
-											<?php if($v["zt"] == 2): ?>交易成功<?php endif; ?></td>
-        <td><?php echo ($v["date"]); ?></td>
-        <td><a onClick="javascript:if(!confirm('删除此订单会连同相关提供和接受订单一起删除,确认要删除吗？'))  return  false; " href="/shi.php/Home/Index/ppdd_list_del/id/<?php echo ($v["id"]); ?>" >删除</a></td>
-        </tr><?php endforeach; endif; ?>
+
+          <?php if(is_array($list)): foreach($list as $key=>$v): ?><tr>
+              <td>R<?php echo ($v["id"]); ?></td>
+              <td>P<?php echo ($v["p_id"]); ?></td>
+              <td>
+              G<?php echo ($v["g_id"]); ?>		  </td>
+              <td><?php echo ($v["p_user"]); ?></td>
+              <td><?php echo ($v["g_user"]); ?>		    </td>
+
+              <td><?php echo ($v["jb"]); ?>		</td>
+              <td><?php if($v["zt"] == 0): ?>待付款<?php endif; ?>
+              <?php if($v["zt"] == 1): ?>已付款<?php endif; ?>
+              <?php if($v["zt"] == 2): ?>交易成功<?php endif; ?></td>
+              <td><?php echo ($v["date"]); ?></td>
+              <td>
+                <a onClick="javascript:if(!confirm('删除此订单会连同相关提供和接受订单一起删除,确认要删除吗？'))  return  false; " href="/shi.php/Home/Index/ppdd_list_del/id/<?php echo ($v["id"]); ?>" >删除</a>
+                <?php echo (ppdd_action($v["id"])); ?>
+              </td>
+            </tr><?php endforeach; endif; ?>
         </tbody>
     </table>
     <style>.pages a,.pages span {
@@ -126,17 +129,17 @@ $(document).ready(function(){
     font-weight:700;
     border-color:#50A8E6;
 }</style>
-   
+
    <div class="pages"><br />
 
                         <div align="right"><?php echo ($page); ?>
                         </div>
    </div>
-    
-    
+
+
     <div class="tip">
     	<div class="tiptop"><span>提示信息</span><a></a></div>
-        
+
       <div class="tipinfo">
         <span><img src="images/ticon.png" /></span>
         <div class="tipright">
@@ -144,19 +147,19 @@ $(document).ready(function(){
         <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
         </div>
       </div>
-        
+
         <div class="tipbtn">
         <input name="" type="button"  class="sure" value="确定" />&nbsp;
         <input name="" type="button"  class="cancel" value="取消" />
         </div>
-    
+
     </div>
-    
-    
-    
-    
+
+
+
+
     </div>
-    
+
     <script type="text/javascript">
 	$('.tablelist tbody tr:odd').addClass('odd');
 	</script>

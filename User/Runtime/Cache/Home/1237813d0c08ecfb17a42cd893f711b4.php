@@ -306,10 +306,10 @@ jQuery(document).ready(function($){
                                 <label class="col-md-3 control-label">身份证<span class="ast">*</span></label>
                                 <div class="col-md-9"><input class="form-control" id="UE_sfz" name="UE_sfz" value="" type="text"/></div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="col-md-3 control-label">微信<span class="ast">*</span></label>
                                 <div class="col-md-9"><input class="form-control" id="weixin" name="weixin" value="" type="text"/></div>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label class="col-md-3 control-label">支付宝<span class="ast">*</span></label>
                                 <div class="col-md-9"><input class="form-control" id="zfb" name="zfb" value="" type="text"/></div>

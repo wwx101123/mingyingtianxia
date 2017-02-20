@@ -823,12 +823,12 @@ catch(err)
                                         <input type="" value="<?php echo ($userData['ue_account']); ?>" id="" class="form-control" name="" readonly>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label class="col-md-4 control-label">微信号</label>
                                     <div class="col-md-8">
                                         <input type="text" value="<?php echo ($userData['weixin']); ?>" id="wechat" class="" name="wechat" <?php if(!empty($userData['weixin'])): ?>readonly<?php endif; ?>>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">支付宝</label>
                                     <div class="col-md-8">

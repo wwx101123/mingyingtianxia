@@ -2688,4 +2688,14 @@ class IndexController extends CommonController
         $this->success('匹配成功!拆分成' . $pipeits . '条订单!');
     }
 
+    public function tixian_jidong(){
+        $UserJj = M("UserJj");
+        $Ppdd = M("Ppdd");
+
+        $ppdd_id = I('get.ppdd_id');
+        $UserJj->where( array('r_id'=>$ppdd_id) )->setField('jiedong',1);
+        $Ppdd->where( array('id'=>$ppdd_id) )->setField('jiedong',1);
+        $this->success('解冻成功！');
+    }
+
 }

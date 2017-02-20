@@ -599,7 +599,7 @@ class InfoController extends CommonController
                     } else {
 
                         //冻结天数 ----------------------------->冻结天数处理-----------> QQ450269178
-                        if(C('jjdjdays')>0){
+                        if(C('jjdjdays')>0 && $proall['jiedong']==0){
                             $ppdd = M('ppdd')->where(array('id'=>$proall['r_id']))->find();
                             $now_day = date('Y-m-d');
                             $dakuan_day = date('Y-m-d',strtotime($ppdd['date_hk']));

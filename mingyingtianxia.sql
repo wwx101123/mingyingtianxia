@@ -1,0 +1,1810 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : localhost
+Source Server Version : 50553
+Source Host           : localhost:3306
+Source Database       : mingyingtianxia
+
+Target Server Type    : MYSQL
+Target Server Version : 50553
+File Encoding         : 65001
+
+Date: 2017-02-20 17:43:09
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_apply`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_apply`;
+CREATE TABLE `rrhbt2t8888_apply` (
+  `AL_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户申请表',
+  `AL_type` varchar(30) DEFAULT '' COMMENT '数据类型',
+  `AL_time` datetime DEFAULT NULL COMMENT '提交时间',
+  `AL_replyTime` datetime DEFAULT NULL COMMENT '回复时间，管理员处理时间',
+  `AL_dataID` int(11) DEFAULT '0' COMMENT '与其它表关联ID',
+  `AL_userID` int(11) DEFAULT '0' COMMENT '与用户表关联ID',
+  `AL_userName` varchar(50) DEFAULT '' COMMENT '申请用户名，管理列表显示',
+  `AL_contact` text COMMENT '联系方式，管理列表显示第一个',
+  `AL_userInfo` text COMMENT '用户其它相关信息',
+  `AL_subIP` varchar(50) DEFAULT NULL COMMENT '信息提交IP',
+  `AL_otherInfo` text COMMENT '其它信息',
+  `AL_note` text COMMENT '申请说明',
+  `AL_reply` text COMMENT '管理员备注信息',
+  `AL_status` smallint(1) DEFAULT '0' COMMENT '处理状态，0-未处理，1-已处理',
+  PRIMARY KEY (`AL_ID`),
+  KEY `MA_dataID` (`AL_dataID`),
+  KEY `MA_ID` (`AL_ID`),
+  KEY `MA_userID` (`AL_userID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_apply
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_area_china`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_area_china`;
+CREATE TABLE `rrhbt2t8888_area_china` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户订单表',
+  `type` smallint(1) DEFAULT '0',
+  `name` varchar(30) DEFAULT '',
+  `parent_id` int(11) DEFAULT '0' COMMENT '状态修改时间',
+  `zip` varchar(11) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_area_china
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_area_world`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_area_world`;
+CREATE TABLE `rrhbt2t8888_area_world` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户订单表',
+  `type` smallint(1) DEFAULT '0',
+  `name` varchar(30) DEFAULT '',
+  `parent_id` int(11) DEFAULT '0' COMMENT '状态修改时间',
+  `zip` varchar(11) DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_area_world
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_attribute`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_attribute`;
+CREATE TABLE `rrhbt2t8888_attribute` (
+  `AB_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品属性-商品类型',
+  `AB_atid` int(11) DEFAULT '0' COMMENT '商品类型ID，attrtype',
+  `AB_theme` varchar(200) DEFAULT '' COMMENT '名称',
+  `AB_rank` int(11) DEFAULT '0',
+  `AB_status` smallint(1) DEFAULT '1',
+  `AB_editMode` smallint(1) DEFAULT '0' COMMENT '属性编辑方式',
+  `AB_values` text COMMENT '属性可选值列表',
+  PRIMARY KEY (`AB_ID`),
+  UNIQUE KEY `IM_ID` (`AB_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_attribute
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_attrtype`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_attrtype`;
+CREATE TABLE `rrhbt2t8888_attrtype` (
+  `AT_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品属性-商品类型',
+  `AT_theme` varchar(200) DEFAULT '' COMMENT '名称',
+  `AT_rank` int(11) DEFAULT '0',
+  `AT_status` smallint(1) DEFAULT '1',
+  `AT_time` datetime DEFAULT NULL COMMENT '添加时间',
+  PRIMARY KEY (`AT_ID`),
+  UNIQUE KEY `IM_ID` (`AT_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_attrtype
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_backupdatabase`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_backupdatabase`;
+CREATE TABLE `rrhbt2t8888_backupdatabase` (
+  `BD_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `BD_time` datetime DEFAULT NULL,
+  `BD_type` varchar(25) DEFAULT NULL,
+  `BD_filePartNum` smallint(6) DEFAULT NULL,
+  `BD_filePath` varchar(200) DEFAULT NULL,
+  `BD_fileSize` int(11) DEFAULT '0',
+  `BD_tableStr` varchar(4000) DEFAULT NULL,
+  `BD_note` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`BD_ID`),
+  KEY `BB_ID` (`BD_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_backupdatabase
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_cart`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_cart`;
+CREATE TABLE `rrhbt2t8888_cart` (
+  `CR_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '购物车',
+  `CR_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `CR_userID` int(11) DEFAULT '0' COMMENT '用户ID',
+  `CR_goodsID` int(11) DEFAULT '0' COMMENT '商品ID',
+  `CR_num` int(11) DEFAULT '0' COMMENT '购买数量',
+  PRIMARY KEY (`CR_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_cart
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_case`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_case`;
+CREATE TABLE `rrhbt2t8888_case` (
+  `CS_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `CS_time` datetime DEFAULT NULL,
+  `CS_revTime` datetime DEFAULT NULL,
+  `CS_type` varchar(30) DEFAULT NULL,
+  `CS_type1ID` int(11) DEFAULT '0',
+  `CS_type2ID` int(11) DEFAULT '0',
+  `CS_theme` varchar(100) DEFAULT NULL,
+  `CS_webImg` text,
+  `CS_webImgs` text,
+  `CS_rank` int(11) DEFAULT '0',
+  `CS_content` longtext,
+  `CS_readNum` int(11) DEFAULT '0',
+  `CS_isIndex` smallint(1) DEFAULT '0',
+  `CS_seokeyword` longtext,
+  `CS_seodesc` longtext,
+  PRIMARY KEY (`CS_ID`),
+  UNIQUE KEY `CS_ID` (`CS_ID`),
+  KEY `CS_readNum` (`CS_readNum`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_case
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_comment`;
+CREATE TABLE `rrhbt2t8888_comment` (
+  `CM_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户评论表',
+  `CM_type` varchar(30) DEFAULT '' COMMENT '数据类型',
+  `CM_time` datetime DEFAULT NULL COMMENT '提交时间',
+  `CM_replyTime` datetime DEFAULT NULL COMMENT '回复时间',
+  `CM_dataID` int(11) DEFAULT '0' COMMENT '与其它表关联ID',
+  `CM_level` smallint(1) DEFAULT '1' COMMENT '评论等级',
+  `CM_userID` int(11) DEFAULT '0' COMMENT '与用户表关联ID',
+  `CM_userName` varchar(50) DEFAULT '' COMMENT '用户名，管理列表显示',
+  `CM_contact` text COMMENT '联系方式',
+  `CM_userInfo` text COMMENT '用户其它相关信息',
+  `CM_subIP` varchar(50) DEFAULT NULL COMMENT '信息提交IP',
+  `CM_otherInfo` text COMMENT '其它信息',
+  `CM_note` text COMMENT '评论内容',
+  `CM_reply` text COMMENT '管理员回复内容',
+  `CM_status` smallint(1) DEFAULT '0' COMMENT '审核状态',
+  PRIMARY KEY (`CM_ID`),
+  KEY `MA_dataID` (`CM_dataID`),
+  KEY `MA_ID` (`CM_ID`),
+  KEY `MA_userID` (`CM_userID`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_download`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_download`;
+CREATE TABLE `rrhbt2t8888_download` (
+  `DL_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DL_time` datetime NOT NULL,
+  `DL_revTime` datetime DEFAULT NULL,
+  `DL_type` varchar(50) DEFAULT NULL,
+  `DL_type1ID` int(11) DEFAULT '0',
+  `DL_type2ID` int(11) DEFAULT '0',
+  `DL_theme` varchar(200) DEFAULT '' COMMENT '下载标题',
+  `DL_webImg` varchar(80) DEFAULT '' COMMENT '封面图片',
+  `DL_fileName` varchar(80) DEFAULT '' COMMENT '下载文件名',
+  `DL_resource` varchar(250) DEFAULT '' COMMENT '外部资源',
+  `DL_content` longtext,
+  `DL_rank` int(11) DEFAULT '0',
+  `DL_readNum` int(11) DEFAULT '0',
+  `DL_seodesc` longtext,
+  `DL_seokeyword` longtext,
+  PRIMARY KEY (`DL_ID`),
+  KEY `IF_ID` (`DL_ID`),
+  KEY `IF_menu1` (`DL_type1ID`),
+  KEY `IF_readNum` (`DL_readNum`),
+  KEY `IF_type1ID` (`DL_type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_download
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_drrz`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_drrz`;
+CREATE TABLE `rrhbt2t8888_drrz` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime DEFAULT NULL,
+  `ip` varchar(60) DEFAULT NULL,
+  `user` varchar(60) DEFAULT NULL,
+  `leixin` int(8) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_drrz
+-- ----------------------------
+INSERT INTO `rrhbt2t8888_drrz` VALUES ('1', '2017-02-14 17:01:40', '139.189.101.189', 'admin', '1');
+INSERT INTO `rrhbt2t8888_drrz` VALUES ('2', '2017-02-15 11:43:54', '139.189.101.189', 'admin', '1');
+INSERT INTO `rrhbt2t8888_drrz` VALUES ('3', '2017-02-15 11:55:02', '139.189.101.189', 'admin', '1');
+INSERT INTO `rrhbt2t8888_drrz` VALUES ('4', '2017-02-16 10:04:08', '223.198.82.159', 'admin', '1');
+INSERT INTO `rrhbt2t8888_drrz` VALUES ('5', '2017-02-16 12:14:00', '223.198.82.159', 'admin', '1');
+INSERT INTO `rrhbt2t8888_drrz` VALUES ('6', '2017-02-17 10:46:32', '139.189.100.12', 'admin', '1');
+INSERT INTO `rrhbt2t8888_drrz` VALUES ('7', '2017-02-20 10:27:41', '223.198.96.200', 'admin', '1');
+INSERT INTO `rrhbt2t8888_drrz` VALUES ('8', '2017-02-20 10:40:16', '223.198.96.200', 'admin', '1');
+INSERT INTO `rrhbt2t8888_drrz` VALUES ('9', '2017-02-20 10:40:38', '223.198.96.200', 'admin', '1');
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_financial`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_financial`;
+CREATE TABLE `rrhbt2t8888_financial` (
+  `FC_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '会员财务明细',
+  `FC_type` varchar(30) DEFAULT '' COMMENT '类型',
+  `FC_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `FC_userID` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `FC_income` float(11,2) DEFAULT '0.00' COMMENT '收入/充值金额',
+  `FC_expend` float(11,2) DEFAULT '0.00' COMMENT '消费/支出金额',
+  `FC_remain` float(11,2) DEFAULT '0.00' COMMENT '当前账户余额',
+  `FC_note` varchar(80) DEFAULT '' COMMENT '摘要',
+  PRIMARY KEY (`FC_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_financial
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_goods`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_goods`;
+CREATE TABLE `rrhbt2t8888_goods` (
+  `GD_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `GD_time` datetime DEFAULT NULL,
+  `GD_revTime` datetime DEFAULT NULL,
+  `GD_type` varchar(30) DEFAULT NULL,
+  `GD_typeID` int(11) DEFAULT '0',
+  `GD_attrID` int(11) DEFAULT '0' COMMENT '商品类型ID',
+  `GD_theme` varchar(100) DEFAULT NULL,
+  `GD_unit` varchar(5) DEFAULT '' COMMENT '商品单位',
+  `GD_price` float(11,2) DEFAULT '0.00',
+  `GD_number` varchar(80) DEFAULT '' COMMENT '商品编号',
+  `GD_size` varchar(60) DEFAULT '' COMMENT '商品规格',
+  `GD_webImg` text,
+  `GD_webImgs` text,
+  `GD_group` varchar(30) DEFAULT '' COMMENT '商品推荐组合ID',
+  `GD_rank` int(11) DEFAULT '0',
+  `GD_content` longtext,
+  `GD_attr` text COMMENT '商品属性',
+  `GD_readNum` int(11) DEFAULT '0',
+  `GD_buyNum` int(11) DEFAULT '0' COMMENT '已下单数量',
+  `GD_commend` varchar(30) DEFAULT '',
+  `GD_stock` smallint(1) DEFAULT '1' COMMENT '商品库存,0-缺货，1-有货',
+  `GD_status` smallint(1) DEFAULT '1' COMMENT '是否显示',
+  `GD_seokeyword` longtext,
+  `GD_seodesc` longtext,
+  PRIMARY KEY (`GD_ID`),
+  UNIQUE KEY `CS_ID` (`GD_ID`),
+  KEY `CS_readNum` (`GD_readNum`)
+) ENGINE=MyISAM AUTO_INCREMENT=230 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_goods
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_goodsaction`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_goodsaction`;
+CREATE TABLE `rrhbt2t8888_goodsaction` (
+  `GA_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品活动表',
+  `GA_type` varchar(50) NOT NULL DEFAULT '' COMMENT '数据类型，区分不同活动',
+  `GA_time` datetime DEFAULT NULL COMMENT '数据添加时间',
+  `GA_gdid` int(11) NOT NULL DEFAULT '0' COMMENT '参与活动商品',
+  `GA_rank` int(11) DEFAULT '0',
+  `GA_webImg` varchar(80) DEFAULT '',
+  `GA_startTime` datetime DEFAULT NULL COMMENT '活动开始时间',
+  `GA_endTime` datetime DEFAULT NULL COMMENT '活动结束时间',
+  `GA_gdprice` float(11,2) DEFAULT '0.00' COMMENT '参与活动价',
+  `GA_gdnum` int(11) DEFAULT '0' COMMENT '参与活动的商品数量上限，0-不限',
+  `GA_person` int(11) DEFAULT '0' COMMENT '启动活动的参与人数（0-不限）',
+  `GA_buyNum` int(11) DEFAULT '0' COMMENT '已下订单数量',
+  `GA_otherInfo` text COMMENT '商品活动的其它信息',
+  `GA_note` text COMMENT '活动说明',
+  `GA_readNum` int(11) DEFAULT '0',
+  `GA_seoTitle` varchar(300) DEFAULT NULL,
+  `GA_seoWord` text,
+  `GA_seoDesc` text,
+  PRIMARY KEY (`GA_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_goodsaction
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_goodsattr`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_goodsattr`;
+CREATE TABLE `rrhbt2t8888_goodsattr` (
+  `GA_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品属性值',
+  `GA_gdid` int(11) DEFAULT '0',
+  `GA_abid` int(11) DEFAULT '0',
+  `GA_value` varchar(100) DEFAULT '',
+  PRIMARY KEY (`GA_ID`),
+  UNIQUE KEY `IM_ID` (`GA_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_goodsattr
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_goodstype`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_goodstype`;
+CREATE TABLE `rrhbt2t8888_goodstype` (
+  `GT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `GT_type` varchar(30) DEFAULT '' COMMENT '数据类型',
+  `GT_fid` int(11) DEFAULT '0' COMMENT '父级ID',
+  `GT_theme` varchar(60) DEFAULT '' COMMENT '商品分类名称',
+  `GT_typeImg` varchar(80) DEFAULT '' COMMENT '商品分类图片',
+  `GT_level` int(11) DEFAULT '0' COMMENT '栏目等级',
+  `GT_rank` int(11) DEFAULT '0' COMMENT '分类排序',
+  `GT_status` smallint(1) DEFAULT '1' COMMENT '分类状态，是否显示',
+  `GT_commend` smallint(1) DEFAULT '0' COMMENT '是否推荐',
+  `GT_seoTitle` varchar(200) DEFAULT NULL,
+  `GT_seoDesc` text,
+  `GT_seoWord` text,
+  PRIMARY KEY (`GT_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=217 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_goodstype
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_hiring`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_hiring`;
+CREATE TABLE `rrhbt2t8888_hiring` (
+  `HR_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `HR_time` datetime DEFAULT NULL COMMENT '发布时间',
+  `HR_revTime` datetime DEFAULT NULL,
+  `HR_endTime` datetime DEFAULT NULL COMMENT '结束日期',
+  `HR_type` varchar(50) DEFAULT '',
+  `HR_type1ID` int(11) DEFAULT '0',
+  `HR_type2ID` int(11) DEFAULT '0',
+  `HR_theme` varchar(250) DEFAULT '' COMMENT '招聘职位',
+  `HR_address` varchar(100) DEFAULT '' COMMENT '工作地点',
+  `HR_number` varchar(20) DEFAULT '' COMMENT '招聘人数',
+  `HR_wages` varchar(30) DEFAULT '' COMMENT '工资待遇',
+  `HR_content` longtext COMMENT '详细说明',
+  `HR_rank` int(11) DEFAULT '0',
+  `HR_readNum` int(11) DEFAULT '0',
+  `HR_seodesc` varchar(350) DEFAULT '',
+  `HR_seokeyword` varchar(350) DEFAULT '',
+  PRIMARY KEY (`HR_ID`),
+  KEY `IF_ID` (`HR_ID`),
+  KEY `IF_menu1` (`HR_type1ID`),
+  KEY `IF_readNum` (`HR_readNum`),
+  KEY `IF_type1ID` (`HR_type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_hiring
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_images`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_images`;
+CREATE TABLE `rrhbt2t8888_images` (
+  `IA_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IA_type` varchar(40) DEFAULT NULL,
+  `IA_typeID` int(11) DEFAULT '0',
+  `IA_theme` varchar(80) DEFAULT NULL,
+  `IA_rank` int(11) DEFAULT '0',
+  `IA_img` varchar(30) DEFAULT NULL,
+  `IA_URL` varchar(120) DEFAULT NULL,
+  `IA_note` longtext,
+  `IA_othersItem` varchar(250) DEFAULT NULL,
+  `IA_state` smallint(1) DEFAULT '1',
+  PRIMARY KEY (`IA_ID`),
+  KEY `IA_ID` (`IA_ID`),
+  KEY `IA_typeID` (`IA_typeID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_images
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_info`;
+CREATE TABLE `rrhbt2t8888_info` (
+  `IF_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IF_time` datetime NOT NULL,
+  `IF_revTime` datetime DEFAULT NULL,
+  `IF_type` varchar(50) DEFAULT NULL,
+  `IF_type1ID` int(11) DEFAULT '0',
+  `IF_type2ID` int(11) DEFAULT '0',
+  `IF_theme` varchar(250) DEFAULT NULL,
+  `IF_webImg` varchar(255) DEFAULT '',
+  `IF_content` longtext,
+  `IF_rank` int(11) DEFAULT '0',
+  `IF_readNum` int(11) DEFAULT '0',
+  `IF_isIndex` smallint(1) DEFAULT '0',
+  `IF_seodesc` longtext,
+  `IF_seokeyword` longtext,
+  `zt` int(8) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`IF_ID`),
+  KEY `IF_ID` (`IF_ID`),
+  KEY `IF_menu1` (`IF_type1ID`),
+  KEY `IF_readNum` (`IF_readNum`),
+  KEY `IF_type1ID` (`IF_type`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_infotype`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_infotype`;
+CREATE TABLE `rrhbt2t8888_infotype` (
+  `IT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IT_type` varchar(40) DEFAULT NULL,
+  `IT_themeType` varchar(30) DEFAULT NULL,
+  `IT_type1ID` int(11) DEFAULT '0',
+  `IT_theme` varchar(50) DEFAULT NULL,
+  `IT_alias` varchar(50) DEFAULT '' COMMENT '栏目别名',
+  `IT_rank` int(11) DEFAULT '0',
+  `IT_typeImg` varchar(60) DEFAULT NULL,
+  `IT_note` text COMMENT '栏目描述',
+  `IT_seoTitle` varchar(100) DEFAULT '' COMMENT 'SEO',
+  `IT_seoDesc` text,
+  `IT_seoWord` text,
+  PRIMARY KEY (`IT_ID`),
+  KEY `IT_ID` (`IT_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_infotype
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_infoweb`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_infoweb`;
+CREATE TABLE `rrhbt2t8888_infoweb` (
+  `IW_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `IW_type` varchar(50) NOT NULL,
+  `IW_theme` varchar(60) DEFAULT '',
+  `IW_alias` varchar(60) DEFAULT '',
+  `IW_content` longtext,
+  `IW_rank` int(11) DEFAULT '0',
+  `IW_typeImg` varchar(30) DEFAULT '' COMMENT '栏目图片',
+  `IW_seotitle` varchar(250) DEFAULT NULL,
+  `IW_seodesc` longtext,
+  `IW_seokeyword` longtext,
+  PRIMARY KEY (`IW_ID`),
+  KEY `WB_ID` (`IW_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_infoweb
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_integral`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_integral`;
+CREATE TABLE `rrhbt2t8888_integral` (
+  `IG_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '积分商品表',
+  `IG_time` datetime DEFAULT NULL,
+  `IG_revTime` datetime DEFAULT NULL,
+  `IG_type` varchar(30) DEFAULT NULL,
+  `IG_typeID` int(11) DEFAULT '0',
+  `IG_theme` varchar(100) DEFAULT NULL,
+  `IG_integral` float(11,2) DEFAULT '0.00',
+  `IG_number` varchar(80) DEFAULT '' COMMENT '商品编号',
+  `IG_size` varchar(60) DEFAULT '' COMMENT '商品规格',
+  `IG_webImg` text,
+  `IG_webImgs` text,
+  `IG_group` varchar(30) DEFAULT '' COMMENT '商品推荐组合ID',
+  `IG_rank` int(11) DEFAULT '0',
+  `IG_content` longtext,
+  `IG_attr` text COMMENT '商品属性',
+  `IG_readNum` int(11) DEFAULT '0',
+  `IG_commend` varchar(30) DEFAULT '',
+  `IG_stock` smallint(1) DEFAULT '1' COMMENT '商品库存,0-缺货，1-有货',
+  `IG_seokeyword` longtext,
+  `IG_seodesc` longtext,
+  PRIMARY KEY (`IG_ID`),
+  UNIQUE KEY `CS_ID` (`IG_ID`),
+  KEY `CS_readNum` (`IG_readNum`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_integral
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_ip`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_ip`;
+CREATE TABLE `rrhbt2t8888_ip` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(255) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `leixin` varchar(255) NOT NULL DEFAULT '0',
+  `user` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_ip
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_jsbz`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_jsbz`;
+CREATE TABLE `rrhbt2t8888_jsbz` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `zffs1` int(8) NOT NULL DEFAULT '0',
+  `zffs2` int(8) NOT NULL DEFAULT '0',
+  `zffs3` int(8) NOT NULL DEFAULT '0',
+  `jb` decimal(15,0) NOT NULL DEFAULT '0',
+  `zt` int(8) NOT NULL DEFAULT '0',
+  `user` varchar(255) DEFAULT NULL,
+  `qr_zt` int(8) DEFAULT '0',
+  `user_tjr` varchar(255) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `user_nc` varchar(255) DEFAULT NULL,
+  `qb` varchar(20) DEFAULT NULL,
+  `old_gid` int(11) NOT NULL DEFAULT '0',
+  `qd` tinyint(1) NOT NULL DEFAULT '0' COMMENT '判断是否添加到抢单',
+  `qdo` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否被抢过',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_jsbz
+-- ----------------------------
+INSERT INTO `rrhbt2t8888_jsbz` VALUES ('1', '1', '1', '1', '5000', '1', '778899', '0', 'niuniu', '2017-02-16 12:15:36', '成成', null, '0', '0', '0');
+INSERT INTO `rrhbt2t8888_jsbz` VALUES ('2', '1', '1', '1', '500', '1', '778899', '0', 'niuniu', '2017-02-16 12:15:54', '成成', null, '0', '0', '0');
+INSERT INTO `rrhbt2t8888_jsbz` VALUES ('4', '1', '1', '1', '400', '1', '778899', '0', 'niuniu', '2017-02-16 12:16:02', '成成', null, '3', '0', '0');
+INSERT INTO `rrhbt2t8888_jsbz` VALUES ('5', '1', '1', '1', '600', '1', '778899', '1', 'niuniu', '2017-02-16 12:16:02', '成成', null, '3', '0', '0');
+INSERT INTO `rrhbt2t8888_jsbz` VALUES ('11', '1', '1', '1', '100', '1', '778899', '1', 'niuniu', '2017-02-16 12:22:37', '成成', null, '6', '0', '0');
+INSERT INTO `rrhbt2t8888_jsbz` VALUES ('13', '1', '1', '1', '400', '1', '778899', '1', 'niuniu', '2017-02-16 12:22:37', '成成', null, '12', '0', '0');
+INSERT INTO `rrhbt2t8888_jsbz` VALUES ('14', '1', '1', '1', '300', '1', '778899', '1', 'niuniu', '2017-02-16 12:22:37', '成成', null, '12', '0', '0');
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_link`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_link`;
+CREATE TABLE `rrhbt2t8888_link` (
+  `LN_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `LN_type` varchar(20) NOT NULL,
+  `LN_theme` varchar(200) DEFAULT NULL,
+  `LN_rank` int(11) DEFAULT '0',
+  `LN_state` smallint(1) DEFAULT '1',
+  `LN_imgMode` varchar(20) DEFAULT NULL,
+  `LN_imgUrl` varchar(200) DEFAULT NULL,
+  `LN_webUrl` varchar(200) DEFAULT NULL,
+  `LN_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`LN_ID`),
+  UNIQUE KEY `IM_ID` (`LN_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_link
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_logusers`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_logusers`;
+CREATE TABLE `rrhbt2t8888_logusers` (
+  `LU_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `LU_time` datetime DEFAULT NULL,
+  `LU_userName` varchar(35) DEFAULT NULL,
+  `LU_userID` int(11) DEFAULT '0',
+  `LU_type` varchar(35) DEFAULT NULL,
+  `LU_note` longtext,
+  PRIMARY KEY (`LU_ID`),
+  KEY `LU_ID` (`LU_ID`),
+  KEY `LU_userID` (`LU_userID`),
+  KEY `LU_userID1` (`LU_userName`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_logusers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_member`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_member`;
+CREATE TABLE `rrhbt2t8888_member` (
+  `MB_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MB_time` date DEFAULT NULL,
+  `MB_loginTime` datetime DEFAULT NULL,
+  `MB_loginNum` int(11) DEFAULT '0',
+  `MB_loginIP` varchar(20) DEFAULT NULL,
+  `MB_realname` varchar(30) DEFAULT NULL,
+  `MB_username` varchar(30) NOT NULL,
+  `MB_userpwd` varchar(32) NOT NULL,
+  `MB_userKey` varchar(36) DEFAULT NULL,
+  `MB_right` int(11) DEFAULT '20',
+  `MB_userGroup` int(11) DEFAULT '0',
+  `MB_rightStr` longtext,
+  `MB_itemNum` int(11) DEFAULT '20',
+  PRIMARY KEY (`MB_ID`),
+  KEY `MB_itemNum` (`MB_itemNum`),
+  KEY `MB_loginNum` (`MB_loginNum`),
+  KEY `MB_userKey` (`MB_userKey`)
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_member
+-- ----------------------------
+INSERT INTO `rrhbt2t8888_member` VALUES ('27', null, null, '0', null, null, 'admin', 'e10adc3949ba59abbe56e057f20f883e', null, '1', '0', null, '20');
+INSERT INTO `rrhbt2t8888_member` VALUES ('39', null, null, '0', null, null, 'abqiang520', '5c67af1abce23ba41992576d94a3041b', null, '1', '0', null, '20');
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_memberlog`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_memberlog`;
+CREATE TABLE `rrhbt2t8888_memberlog` (
+  `ML_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `ML_time` datetime NOT NULL,
+  `ML_date` date NOT NULL,
+  `ML_userID` int(11) NOT NULL,
+  `ML_realname` varchar(30) NOT NULL,
+  `ML_ip` varchar(20) NOT NULL,
+  `ML_ipCN` varchar(50) NOT NULL,
+  `ML_menuFileID` mediumint(9) NOT NULL DEFAULT '0',
+  `ML_note` varchar(255) DEFAULT NULL,
+  `ML_readNum` smallint(6) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ML_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_memberlog
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_menufile`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_menufile`;
+CREATE TABLE `rrhbt2t8888_menufile` (
+  `MF_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MF_level` int(11) DEFAULT '0',
+  `MF_fileID` int(11) DEFAULT '0',
+  `MF_theme` varchar(50) DEFAULT NULL,
+  `MF_fileName` varchar(35) DEFAULT NULL,
+  `MF_getMudi` varchar(16) DEFAULT NULL,
+  `MF_example` varchar(160) DEFAULT NULL,
+  `MF_rank` int(11) DEFAULT '0',
+  `MF_note` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`MF_ID`),
+  KEY `MF_fileID` (`MF_fileID`),
+  KEY `MF_ID` (`MF_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_menufile
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_menutree`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_menutree`;
+CREATE TABLE `rrhbt2t8888_menutree` (
+  `MT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `MT_level` int(11) DEFAULT '0',
+  `MT_menuID` int(11) DEFAULT '0',
+  `MT_fileID` int(11) DEFAULT '0',
+  `MT_theme` varchar(50) DEFAULT NULL,
+  `MT_fileName` varchar(25) DEFAULT NULL,
+  `MT_getMudi` varchar(20) DEFAULT NULL,
+  `MT_getDataMode` varchar(50) DEFAULT NULL,
+  `MT_getDataModeStr` varchar(50) DEFAULT NULL,
+  `MT_getDataType` varchar(20) DEFAULT NULL,
+  `MT_getDataTypeCN` varchar(50) DEFAULT NULL,
+  `MT_getDataType2` varchar(20) DEFAULT NULL,
+  `MT_getDataID` int(11) DEFAULT '0',
+  `MT_getImgSize` varchar(60) DEFAULT '',
+  `MT_getImgSize2` varchar(60) DEFAULT '',
+  `MT_getOthers` varchar(160) DEFAULT NULL,
+  `MT_URL` varchar(200) DEFAULT NULL,
+  `MT_rank` int(11) DEFAULT '0',
+  `MT_state` int(11) DEFAULT '0',
+  PRIMARY KEY (`MT_ID`),
+  KEY `MT_fileID` (`MT_fileID`),
+  KEY `MT_ID` (`MT_ID`),
+  KEY `MT_menuID` (`MT_menuID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_menutree
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_message`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_message`;
+CREATE TABLE `rrhbt2t8888_message` (
+  `MA_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '前台提交信息，留言、申请等',
+  `MA_type` varchar(30) DEFAULT '' COMMENT '数据类型',
+  `MA_theme` varchar(60) DEFAULT '' COMMENT '留言主题',
+  `MA_time` datetime DEFAULT NULL COMMENT '提交时间',
+  `MA_replyTime` datetime DEFAULT NULL COMMENT '回复时间',
+  `MA_dataID` int(11) DEFAULT '0' COMMENT '与其它表关联ID',
+  `MA_userID` int(11) DEFAULT '0' COMMENT '与用户表关联ID',
+  `MA_userName` varchar(50) DEFAULT '' COMMENT '留言用户名，管理列表显示',
+  `MA_contact` text COMMENT '联系方式',
+  `MA_userInfo` text COMMENT '用户其它相关信息',
+  `MA_subIP` varchar(50) DEFAULT NULL COMMENT '信息提交IP',
+  `MA_otherInfo` text COMMENT '其它信息',
+  `MA_note` text COMMENT '用户留言内容',
+  `MA_reply` text COMMENT '管理员回复内容',
+  `MA_status` smallint(1) DEFAULT '0' COMMENT '审核状态',
+  `zt` int(8) NOT NULL DEFAULT '0',
+  `pic` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`MA_ID`),
+  KEY `MA_dataID` (`MA_dataID`),
+  KEY `MA_ID` (`MA_ID`),
+  KEY `MA_userID` (`MA_userID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_message
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_mobmsgset`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_mobmsgset`;
+CREATE TABLE `rrhbt2t8888_mobmsgset` (
+  `SYS_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SYS_theme` varchar(100) DEFAULT NULL,
+  `SYS_address` varchar(200) DEFAULT NULL,
+  `SYS_postCode` varchar(50) DEFAULT NULL,
+  `SYS_contact` varchar(50) DEFAULT '',
+  `SYS_mobile` varchar(50) DEFAULT '',
+  `SYS_mail` varchar(80) DEFAULT NULL,
+  `SYS_phone` varchar(50) DEFAULT NULL,
+  `SYS_hotPhone` varchar(50) DEFAULT NULL,
+  `SYS_fax` varchar(50) DEFAULT NULL,
+  `SYS_qq` varchar(30) DEFAULT NULL,
+  `SYS_banquan` varchar(100) DEFAULT NULL,
+  `SYS_seoTitle` varchar(300) DEFAULT '',
+  `SYS_seoWord` text,
+  `SYS_seoDesc` text,
+  PRIMARY KEY (`SYS_ID`),
+  KEY `SYS_postCode` (`SYS_postCode`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_mobmsgset
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_order`;
+CREATE TABLE `rrhbt2t8888_order` (
+  `OD_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户订单表',
+  `OD_type` varchar(30) DEFAULT '' COMMENT '订单类型',
+  `OD_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `OD_revTime` datetime DEFAULT NULL COMMENT '状态修改时间',
+  `OD_sn` varchar(60) DEFAULT '' COMMENT '订单编号',
+  `OD_userID` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `OD_dataID` varchar(30) DEFAULT '' COMMENT '商品ID字符患，用于统计已订购数量',
+  `OD_address` text COMMENT '收货地址',
+  `OD_goods` text COMMENT '商品信息',
+  `OD_ship` text COMMENT '物流配送信息',
+  `OD_pay` smallint(1) DEFAULT '1' COMMENT '支付方式,0-货到付款;1-支付宝',
+  `OD_gMoney` float(11,2) DEFAULT '0.00' COMMENT '本次订单的商品总价',
+  `OD_sMoney` float(11,2) DEFAULT '0.00' COMMENT '本次订单的物流费用',
+  `OD_status` varchar(5) DEFAULT '000' COMMENT '订单状态',
+  `OD_tradeOn` varchar(60) DEFAULT '' COMMENT '支付宝交易号',
+  `OD_shipSN` varchar(60) DEFAULT '' COMMENT '物流单号',
+  PRIMARY KEY (`OD_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_orderinte`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_orderinte`;
+CREATE TABLE `rrhbt2t8888_orderinte` (
+  `OI_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户积分商品订单表',
+  `OI_type` varchar(30) DEFAULT '' COMMENT '订单类型',
+  `OI_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `OI_revTime` datetime DEFAULT NULL COMMENT '状态修改时间',
+  `OI_sn` varchar(60) DEFAULT '' COMMENT '订单编号',
+  `OI_userID` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `OI_address` text COMMENT '收货地址',
+  `OI_goods` text COMMENT '积分商品信息',
+  `OI_ship` text COMMENT '物流配送信息',
+  `OI_pay` smallint(1) DEFAULT '1' COMMENT '支付方式,0-货到付款;1-支付宝',
+  `OI_integral` float(11,2) DEFAULT '0.00' COMMENT '本次订单所需积分',
+  `OI_sMoney` float(11,2) DEFAULT '0.00' COMMENT '本次订单的物流费用',
+  `OI_status` varchar(5) DEFAULT '600' COMMENT '订单状态',
+  PRIMARY KEY (`OI_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_orderinte
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_orderstatus`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_orderstatus`;
+CREATE TABLE `rrhbt2t8888_orderstatus` (
+  `OS_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '订单状态表',
+  `OS_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `OS_theme` varchar(200) DEFAULT '' COMMENT '名称',
+  `OS_code` varchar(10) DEFAULT '' COMMENT '状态代码',
+  `OS_note` varchar(300) DEFAULT '' COMMENT '备注',
+  `OS_rank` int(11) DEFAULT '0' COMMENT '排序',
+  PRIMARY KEY (`OS_ID`),
+  UNIQUE KEY `IM_ID` (`OS_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_orderstatus
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_pai`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_pai`;
+CREATE TABLE `rrhbt2t8888_pai` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(255) NOT NULL,
+  `pin` varchar(255) DEFAULT NULL,
+  `zt` varchar(255) DEFAULT NULL,
+  `sc_date` datetime DEFAULT NULL,
+  `sy_user` varchar(255) NOT NULL DEFAULT '0',
+  `sy_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_pai
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_pin`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_pin`;
+CREATE TABLE `rrhbt2t8888_pin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(255) NOT NULL,
+  `pin` varchar(255) DEFAULT NULL,
+  `zt` varchar(255) DEFAULT NULL,
+  `sc_date` datetime DEFAULT NULL,
+  `sy_user` varchar(255) NOT NULL DEFAULT '0',
+  `sy_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_pin
+-- ----------------------------
+INSERT INTO `rrhbt2t8888_pin` VALUES ('1', 'niuniu', '50292ff1ded26b4bb0107e0ed418672e', '1', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('2', 'niuniu', 'e30c82cd6e6e5667128a4e2534edae47', '1', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('3', 'niuniu', '0458207c90842d2ca7c9e88c3b5fe09a', '1', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('4', 'niuniu', 'ff3730abab1fd974cd4158f8b298b98f', '1', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('5', 'niuniu', 'b942f7929ee121ce9a91b821499301d5', '1', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('6', 'niuniu', 'e233666104258c5aff458f3ce4d87f17', '1', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('7', 'niuniu', '697da36ea4db7efb50e0cbf7b1487f66', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('8', 'niuniu', 'cd52405ca034e9f734ce995c927fb572', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('9', 'niuniu', '053301652528aefd5c00730cadd36633', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('10', 'niuniu', 'a730ac8166a5ad6ec7cb8a3718cb7e95', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('11', 'niuniu', '7b6bfb65147bc001ec8a2016707d4b6c', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('12', 'niuniu', '8ab57d74f951612ff1e6e1c40929f5fb', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('13', 'niuniu', '3da0b8f8f738254ef16e9f56667e9193', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('14', 'niuniu', 'f707309df08823d18e500875f713ac40', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('15', 'niuniu', 'a3ec855be001417e080168f6a8ab914f', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('16', 'niuniu', '0b3cb268f34e6a67f639f93add1606c6', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('17', 'niuniu', '35f68bbd2ae020ab84125c4410c6069a', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('18', 'niuniu', 'a8e0290e68e5cd9543cc310b494f05af', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('19', 'niuniu', '543674ead033713691739044fab97183', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('20', 'niuniu', '68a2fa79bbe414b48b58db7c219cf76b', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('21', 'niuniu', '81d8b4b9580349dadba4adccac6eeef4', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('22', 'niuniu', 'eff4c21cf9b26bc42910594441580d70', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('23', 'niuniu', '08760a3c6f5b284ac6f1a9cf0d8b2ccc', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('24', 'niuniu', 'c90e05721e5f7fca5d79ea19ea916f7d', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('25', 'niuniu', '37c77b4772c76785fc63ecf9433891ca', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('26', 'niuniu', '0898944f608d1bb01a22abd15b4ef153', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('27', 'niuniu', '331118e981ada577e41584ca4850e15f', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('28', 'niuniu', '6a187fdc07d4c45bff762947b8137340', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('29', 'niuniu', '5949817deb10cbda5a0520dad64c6bb1', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('30', 'niuniu', '390145ba37fa6f795b12845a6bb9d922', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('31', 'niuniu', '8f31b7e7581a1c684d7b2ce3dd84e7d4', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('32', 'niuniu', '768aaaa3f7d6c53f3244f9a1e846bbbd', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('33', 'niuniu', 'e6e847c9542901806c4dc3053d9776cc', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('34', 'niuniu', '37b9c5e71abf4e0f39a4eb0d0369ef73', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('35', 'niuniu', '30e74fc74b111ab2974e81a93cf44897', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('36', 'niuniu', 'aab5c275a6db19563c4b0b93ba575383', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('37', 'niuniu', '984f52a357579786979d6edb5cf48172', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('38', 'niuniu', '6ed0a859545a07d55c80d227d0ce15ae', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('39', 'niuniu', 'e9826dc77b2fb2b670d9e320bcdde034', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('40', 'niuniu', 'a3e6166d8f142bd6bc03d4eeb9fa1370', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('41', 'niuniu', '00f7b32fb66a57307be3ba8f63db111e', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('42', 'niuniu', 'c743ea37dc74768ad214137b850c2d43', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('43', 'niuniu', '05294dfdd1b545b3ed836b060264a8e2', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('44', 'niuniu', '44357486bc023b50396f193f82223f71', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('45', 'niuniu', '663750d8fdd8c9b766fffc9f296f575e', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('46', 'niuniu', 'd4dcdbfff44bca786b6c620345948a92', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('47', 'niuniu', '1ab2fa1943a671f86bed55ff809fb577', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('48', 'niuniu', '08185716500315bad882f84978c61ab5', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('49', 'niuniu', '9b1ad9a8a6812c382cbe1dd0045acb2f', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('50', 'niuniu', '709dde464d33f09a50de862b57d6cf3c', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('51', 'niuniu', '16794a46f0257d433c5c4cdf26a03fa1', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('52', 'niuniu', 'e2abf114b3c25de5f2ca0ea03e07e1ff', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('53', 'niuniu', 'cd00c0024bbf9d441ab6eb804650aea1', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('54', 'niuniu', 'af50a95f796627dc1442429001b3b083', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('55', 'niuniu', 'addd0df051d9e60c7d680640d0811690', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('56', 'niuniu', '39eb32a212bb75ce575b73df9d3224b6', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('57', 'niuniu', '9457e2cbc9f91d6dc98a17211913380c', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('58', 'niuniu', '44a19ff1d023feda952b0a7aca2ba992', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('59', 'niuniu', 'bd2a5ae5e826b42512dfe4f46bce785d', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('60', 'niuniu', '59214ed1e3d920a99a36682c93c7e066', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('61', 'niuniu', '69dad8795e8998df3afd0bb3bd672f5c', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('62', 'niuniu', '8b59b524bb41ff60bd899d6e8feeefe1', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('63', 'niuniu', '0886a7bce2871edbc4c5c71eece854ea', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('64', 'niuniu', 'a7b271d2e4b222790deb0c82b31b0374', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('65', 'niuniu', 'e63b3a3a1d7ed758527e0593f5b6cc6b', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('66', 'niuniu', '7fd285e6f5c29f305e49a9b4aa98e408', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('67', 'niuniu', 'f0b0f77de177725840f4a18bab9fa983', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('68', 'niuniu', 'd372ea673c30d79e431277b65defc0fe', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('69', 'niuniu', 'a79b6059f85afc14cad8533e1085ff08', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('70', 'niuniu', 'ba6bb17e0b14f8ecc861adaa18263e16', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('71', 'niuniu', '001375a60d99cddec4b1b47c45e989a6', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('72', 'niuniu', '50af38bce75dfc763e5116b5bf2492d0', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('73', 'niuniu', 'bd21efcf983360c49c90120d749ddab3', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('74', 'niuniu', '5ab8317f1b56e3c90c90f03421c28a8e', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('75', 'niuniu', 'a042fd13fa065bceaa14e29abebf2e87', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('76', 'niuniu', '61c94a9fa04abb9b6e3df26cd2e75b1e', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('77', 'niuniu', 'a6a6b3ba5f676d01fb791dbb04a8c6c1', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('78', 'niuniu', 'c86456fcbc74dfa6dddef379b1b115e8', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('79', 'niuniu', '0e2a7ceddcfe1336a9ebaa9d17da717b', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('80', 'niuniu', '1ba176c640f510c4a49692c09a69782d', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('81', 'niuniu', '217b810a0edd2e1994ed0f4f417af8ae', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('82', 'niuniu', '18350253d811ceb2ab075be409b279c2', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('83', 'niuniu', '0519ed13d5a72170d6608125f3ba58c3', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('84', 'niuniu', '9fa5e628162f1532faa9d5456f8b120f', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('85', 'niuniu', '69d80ce059b4c17e67ec3237ebe920a0', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('86', 'niuniu', '8f5e619ca26e5fa3542f47232f6cf16a', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('87', 'niuniu', '08897e08a994250c03cf77510bf61da5', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('88', 'niuniu', '20f33ea080dfcd22d72b46adbf714570', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('89', 'niuniu', '1cb46fd9be812120b69a465d19ea256d', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('90', 'niuniu', '1510f04e270d0a15c091b7ba5023fb05', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('91', 'niuniu', '3347f336dbcede5cf7ce083c6afb3e0a', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('92', 'niuniu', '2b1b3ff4423a5c06cffae98f09ea28f5', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('93', 'niuniu', '2775e4040c212d41fe73312272359471', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('94', 'niuniu', '4a536255fbceb5663c1d6a52534d18b7', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('95', 'niuniu', '38f5da1303515e3faedb8230e4c875cb', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('96', 'niuniu', '76a1ecfacbf407a0c6a321408f24b5ea', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('97', 'niuniu', '3f61b76d41328500bc394808c90b3cee', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('98', 'niuniu', '9c3d95d296927df4c5538eb487a1540b', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('99', 'niuniu', '82adf3551ba6ee76c2b26fbb97f46434', '0', '2017-02-15 11:50:48', '0', null);
+INSERT INTO `rrhbt2t8888_pin` VALUES ('100', 'niuniu', 'e0b0ce916db0a9fdd6a7c31721febd7c', '0', '2017-02-15 11:50:48', '0', null);
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_ppdd`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_ppdd`;
+CREATE TABLE `rrhbt2t8888_ppdd` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `p_id` varchar(255) DEFAULT NULL,
+  `g_id` varchar(255) DEFAULT NULL,
+  `jb` decimal(15,0) DEFAULT NULL,
+  `p_user` varchar(255) DEFAULT NULL,
+  `g_user` varchar(255) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `zt` int(8) NOT NULL DEFAULT '0',
+  `pic` varchar(255) DEFAULT NULL,
+  `zffs1` int(8) DEFAULT NULL,
+  `zffs2` int(8) DEFAULT NULL,
+  `zffs3` int(8) DEFAULT NULL,
+  `ts_zt` int(8) NOT NULL DEFAULT '0',
+  `date_hk` datetime DEFAULT NULL,
+  `pic2` varchar(255) DEFAULT NULL,
+  `dk_ci` int(11) DEFAULT '0' COMMENT '打款次数',
+  `sk_ci` int(11) DEFAULT '0' COMMENT '收款次数',
+  `old_pid` int(11) NOT NULL DEFAULT '0',
+  `old_gid` int(11) NOT NULL DEFAULT '0',
+  `is_sms` int(11) NOT NULL DEFAULT '0',
+  `zhuangtai` int(10) NOT NULL DEFAULT '0',
+  `jiedong` tinyint(1) NOT NULL DEFAULT '0' COMMENT '解冻',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_ppdd
+-- ----------------------------
+INSERT INTO `rrhbt2t8888_ppdd` VALUES ('1', '4', '1', '5000', 'niuniu', '778899', '2017-02-16 12:19:39', '0', '0', '1', '1', '1', '0', null, null, '0', '0', '4', '1', '0', '1', '0');
+INSERT INTO `rrhbt2t8888_ppdd` VALUES ('2', '5', '2', '500', 'niuniu', '778899', '2017-02-16 12:19:39', '0', '0', '1', '1', '1', '0', null, null, '0', '0', '1', '2', '0', '1', '0');
+INSERT INTO `rrhbt2t8888_ppdd` VALUES ('3', '2', '4', '400', 'niuniu', '778899', '2017-02-16 12:19:40', '1', '/Uploads/148757930493696.jpg', '1', '1', '1', '0', '2017-02-20 16:28:24', null, '1', '0', '2', '3', '0', '1', '0');
+INSERT INTO `rrhbt2t8888_ppdd` VALUES ('4', '3', '5', '600', 'niuniu', '778899', '2017-02-16 12:19:40', '2', '/Uploads/148723594042297.jpg', '1', '1', '1', '0', '2017-02-16 17:05:43', null, '1', '1', '3', '3', '0', '0', '0');
+INSERT INTO `rrhbt2t8888_ppdd` VALUES ('7', '6', '11', '100', 'niuniu', '778899', '2017-02-16 14:28:00', '2', null, '1', '1', '1', '0', '2017-02-16 16:29:59', null, '1', '1', '1', '6', '0', '0', '0');
+INSERT INTO `rrhbt2t8888_ppdd` VALUES ('8', '7', '13', '400', 'niuniu', '778899', '2017-02-17 10:46:37', '2', '/Uploads/148755837677409.jpg', '1', '1', '1', '0', '2017-02-20 10:39:37', null, '1', '1', '7', '12', '0', '0', '0');
+INSERT INTO `rrhbt2t8888_ppdd` VALUES ('9', '9', '14', '300', 'niuniu', '778899', '2017-02-17 11:29:11', '2', '/Uploads/148755836142689.jpg', '1', '1', '1', '0', '2017-02-20 10:39:23', null, '1', '1', '8', '12', '0', '0', '1');
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_ppdd_ly`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_ppdd_ly`;
+CREATE TABLE `rrhbt2t8888_ppdd_ly` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ppdd_id` int(14) DEFAULT NULL,
+  `user` varchar(14) DEFAULT NULL,
+  `nr` text,
+  `date` datetime DEFAULT NULL,
+  `user_nc` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_ppdd_ly
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_regusers`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_regusers`;
+CREATE TABLE `rrhbt2t8888_regusers` (
+  `RU_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `RU_time` datetime DEFAULT NULL COMMENT '注册时间',
+  `RU_regIP` varchar(30) DEFAULT '' COMMENT '注册IP',
+  `RU_img` varchar(30) DEFAULT '' COMMENT '用户头像',
+  `RU_username` varchar(50) DEFAULT NULL COMMENT '用户名，登陆名',
+  `RU_userpwd` varchar(150) DEFAULT NULL COMMENT '用户登陆密码',
+  `RU_answer` varchar(100) DEFAULT NULL COMMENT '密保问题',
+  `RU_question` varchar(200) DEFAULT NULL COMMENT '密保答案',
+  `RU_userInfo` text COMMENT '用户信息',
+  `RU_contact` text COMMENT '联系信息',
+  `RU_otherInfo` text COMMENT '其它信息',
+  `RU_note` text COMMENT '管理员备注信息',
+  `RU_limit` smallint(1) DEFAULT '0' COMMENT '用户等级，0-普通，1-高级',
+  `RU_status` smallint(1) DEFAULT '1' COMMENT '用户状态，1-正常，0-禁止',
+  `RU_nowTime` datetime DEFAULT NULL COMMENT '当前登陆时间',
+  `RU_nowIP` varchar(80) DEFAULT NULL COMMENT '当前登陆IP',
+  `RU_lastTime` datetime DEFAULT NULL COMMENT '上次登录时间',
+  `RU_lastIP` varchar(80) DEFAULT NULL COMMENT '上次登陆IP',
+  `RU_logNum` int(11) DEFAULT '0' COMMENT '总登录次数',
+  `RU_online` int(11) DEFAULT '0' COMMENT '总在线时间',
+  PRIMARY KEY (`RU_ID`),
+  UNIQUE KEY `UE_ID` (`RU_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_regusers
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_service`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_service`;
+CREATE TABLE `rrhbt2t8888_service` (
+  `SV_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SV_type` varchar(20) NOT NULL,
+  `SV_time` datetime NOT NULL,
+  `SV_rank` int(11) DEFAULT '0',
+  `SV_theme` varchar(200) DEFAULT NULL,
+  `SV_dataMode` varchar(20) DEFAULT NULL,
+  `SV_accounts` varchar(200) DEFAULT NULL,
+  `SV_state` int(11) DEFAULT '1',
+  PRIMARY KEY (`SV_ID`),
+  UNIQUE KEY `IM_ID` (`SV_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_service
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_shipping`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_shipping`;
+CREATE TABLE `rrhbt2t8888_shipping` (
+  `SP_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '物流表',
+  `SP_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `SP_theme` varchar(200) DEFAULT '' COMMENT '物流名称',
+  `SP_type` varchar(20) DEFAULT '' COMMENT '物流类型',
+  `SP_code` varchar(30) DEFAULT '' COMMENT '快递公司代码',
+  `SP_price` float(11,2) DEFAULT '0.00' COMMENT '单笔运费',
+  `SP_cheap` float(11,2) DEFAULT '0.00' COMMENT '免运费额度',
+  `SP_note` varchar(300) DEFAULT '' COMMENT '物流描述',
+  `SP_status` smallint(1) DEFAULT '1',
+  PRIMARY KEY (`SP_ID`),
+  UNIQUE KEY `IM_ID` (`SP_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_shipping
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_shopsj`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_shopsj`;
+CREATE TABLE `rrhbt2t8888_shopsj` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sjmc` varchar(255) DEFAULT NULL,
+  `jyxm` varchar(255) DEFAULT NULL,
+  `lxfs` varchar(255) DEFAULT NULL,
+  `dz` varchar(255) DEFAULT NULL,
+  `slt` varchar(255) DEFAULT NULL,
+  `content` longtext,
+  `user` varchar(255) DEFAULT NULL,
+  `zt` int(15) NOT NULL DEFAULT '0',
+  `date` datetime DEFAULT NULL,
+  `leixin` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_shopsj
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_shopsys`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_shopsys`;
+CREATE TABLE `rrhbt2t8888_shopsys` (
+  `SPS_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SPS_defWord` varchar(30) DEFAULT '',
+  `SPS_hotWord` varchar(100) DEFAULT NULL,
+  `SPS_smtpHost` varchar(30) DEFAULT '' COMMENT 'SMTP服务器',
+  `SPS_sendMail` varchar(60) DEFAULT '' COMMENT '发件邮箱地址',
+  `SPS_sendPwd` varchar(30) DEFAULT '' COMMENT '发件邮箱密码',
+  `SPS_giveMail` varchar(30) DEFAULT '' COMMENT '接收用户意见反馈邮箱',
+  `SPS_regInte` int(11) DEFAULT '0' COMMENT '用户注册获得积分',
+  `SPS_buyInte` int(11) DEFAULT '0' COMMENT '购买商品获得积分基数',
+  `SPS_comInte` int(11) DEFAULT '0' COMMENT '评价获得积分数',
+  `SPS_payType` varchar(10) DEFAULT '' COMMENT '支持的支付方式',
+  `SPS_zfb_pid` varchar(40) DEFAULT '' COMMENT '合作身份者id',
+  `SPS_zfb_key` varchar(40) DEFAULT '' COMMENT '安全检验码',
+  `SPS_zfb_mail` varchar(30) DEFAULT '' COMMENT '签约账户',
+  `SPS_price` int(11) DEFAULT '0' COMMENT '价格区间设置',
+  `SPS_integral` int(11) DEFAULT '0' COMMENT '价格区间设置',
+  `SPS_divide` int(11) DEFAULT '0' COMMENT '划分个数',
+  PRIMARY KEY (`SPS_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_shopsys
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_single`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_single`;
+CREATE TABLE `rrhbt2t8888_single` (
+  `SG_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SG_type` varchar(50) DEFAULT NULL,
+  `SG_type1ID` int(11) DEFAULT '0',
+  `SG_type2ID` int(11) DEFAULT '0',
+  `SG_content` longtext,
+  PRIMARY KEY (`SG_ID`),
+  KEY `WB_ID` (`SG_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_single
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_sysadmin`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_sysadmin`;
+CREATE TABLE `rrhbt2t8888_sysadmin` (
+  `SA_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SA_adminLoginKey` varchar(36) DEFAULT NULL,
+  `SA_skinMode` varchar(25) DEFAULT NULL,
+  `SA_isCloseUserMenu` smallint(6) DEFAULT '0',
+  `SA_userSaveMode` smallint(6) DEFAULT '0',
+  `SA_loginMode` smallint(6) DEFAULT '0',
+  PRIMARY KEY (`SA_ID`),
+  KEY `SA_ID` (`SA_ID`),
+  KEY `SA_key` (`SA_adminLoginKey`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_sysadmin
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_sysimages`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_sysimages`;
+CREATE TABLE `rrhbt2t8888_sysimages` (
+  `SI_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SI_isThumb` varchar(10) DEFAULT NULL,
+  `SI_thumbW` smallint(6) DEFAULT '0',
+  `SI_thumbH` smallint(6) DEFAULT '0',
+  `SI_isWatermark` varchar(10) DEFAULT NULL,
+  `SI_watermarkPath` varchar(200) DEFAULT NULL,
+  `SI_watermarkPos` varchar(16) DEFAULT NULL,
+  `SI_watermarkPadding` smallint(6) DEFAULT '0',
+  `SI_watermarkFontContent` varchar(20) DEFAULT NULL,
+  `SI_watermarkFontSize` smallint(6) DEFAULT '0',
+  `SI_watermarkFontColor` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`SI_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_sysimages
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_system`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_system`;
+CREATE TABLE `rrhbt2t8888_system` (
+  `SYS_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `SYS_theme` varchar(100) DEFAULT NULL,
+  `SYS_address` varchar(200) DEFAULT NULL,
+  `SYS_postCode` varchar(50) DEFAULT NULL,
+  `SYS_contact` varchar(50) DEFAULT '',
+  `SYS_mobile` varchar(50) DEFAULT '',
+  `SYS_mail` varchar(80) DEFAULT NULL,
+  `SYS_phone` varchar(50) DEFAULT NULL,
+  `SYS_hotPhone` varchar(50) DEFAULT NULL,
+  `SYS_fax` varchar(50) DEFAULT NULL,
+  `SYS_qq` varchar(30) DEFAULT NULL,
+  `SYS_banquan` varchar(100) DEFAULT NULL,
+  `SYS_seoTitle` varchar(300) DEFAULT '',
+  `SYS_seoWord` text,
+  `SYS_seoDesc` text,
+  `SPS_smtpHost` varchar(80) DEFAULT NULL,
+  `SPS_sendMail` varchar(80) DEFAULT NULL,
+  `SPS_sendPwd` varchar(80) DEFAULT NULL,
+  `SPS_giveMail` varchar(80) DEFAULT NULL,
+  `a_ztj` decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '直推荐奖',
+  `a_ztj2` decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '间推奖',
+  `a_ztj3` decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '间间推奖',
+  `a_bdj` decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '报单奖',
+  `a_ld8` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `a_ld9` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `a_ld10` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `a_kd_zsb` decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '钻石币开单数量',
+  `a_sxf` decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '交易大厅手续费',
+  `a_btbjg` decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '比特币价格',
+  `a_fxzl` decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '发行总量',
+  `a_fuhuo` decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '复活费用',
+  `a_mrfh_cj` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `a_ybfxsl` decimal(15,4) NOT NULL DEFAULT '0.0000' COMMENT '泫?办行?量',
+  `a_zsbfxsl` decimal(15,4) NOT NULL,
+  `a_ybhuilv` decimal(15,6) NOT NULL,
+  `a_zsbhuilv` decimal(15,6) NOT NULL,
+  `a_bdzxds` decimal(15,4) NOT NULL,
+  `zt` int(8) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`SYS_ID`),
+  KEY `SYS_postCode` (`SYS_postCode`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_system
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_taobaoset`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_taobaoset`;
+CREATE TABLE `rrhbt2t8888_taobaoset` (
+  `TBS_ID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `TBS_state` tinyint(1) DEFAULT '1',
+  `TBS_appkey` varchar(30) DEFAULT '',
+  `TBS_secret` varchar(150) DEFAULT '',
+  PRIMARY KEY (`TBS_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_taobaoset
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_task`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_task`;
+CREATE TABLE `rrhbt2t8888_task` (
+  `MA_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '前台提交信息，留言、申请等',
+  `MA_type` varchar(30) DEFAULT '' COMMENT '数据类型',
+  `MA_theme` varchar(60) DEFAULT '' COMMENT '留言主题',
+  `MA_time` datetime DEFAULT NULL COMMENT '提交时间',
+  `MA_replyTime` datetime DEFAULT NULL COMMENT '回复时间',
+  `MA_dataID` int(11) DEFAULT '0' COMMENT '与其它表关联ID',
+  `MA_userID` int(11) DEFAULT '0' COMMENT '与用户表关联ID',
+  `MA_userName` varchar(50) DEFAULT '' COMMENT '留言用户名，管理列表显示',
+  `MA_contact` text COMMENT '联系方式',
+  `MA_userInfo` text COMMENT '用户其它相关信息',
+  `MA_subIP` varchar(50) DEFAULT NULL COMMENT '信息提交IP',
+  `MA_otherInfo` text COMMENT '其它信息',
+  `MA_note` text COMMENT '用户留言内容',
+  `MA_reply` text COMMENT '管理员回复内容',
+  `MA_status` smallint(1) DEFAULT '0' COMMENT '审核状态',
+  `zt` int(8) NOT NULL DEFAULT '0',
+  `pic` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`MA_ID`),
+  KEY `MA_dataID` (`MA_dataID`),
+  KEY `MA_ID` (`MA_ID`),
+  KEY `MA_userID` (`MA_userID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_task
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_tgbz`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_tgbz`;
+CREATE TABLE `rrhbt2t8888_tgbz` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `zffs1` int(8) NOT NULL DEFAULT '0',
+  `zffs2` int(8) NOT NULL DEFAULT '0',
+  `zffs3` int(8) NOT NULL DEFAULT '0',
+  `jb` decimal(15,0) NOT NULL DEFAULT '0',
+  `zt` int(8) NOT NULL DEFAULT '0',
+  `user` varchar(255) DEFAULT NULL,
+  `qr_zt` int(255) DEFAULT '0',
+  `user_tjr` varchar(255) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `user_nc` varchar(255) DEFAULT NULL,
+  `cf_ds` int(8) NOT NULL DEFAULT '0',
+  `jycg_ds` int(8) NOT NULL DEFAULT '0',
+  `yid` int(11) DEFAULT NULL,
+  `ok` tinyint(1) NOT NULL DEFAULT '1',
+  `pdend` int(10) DEFAULT '0',
+  `pdday` int(10) DEFAULT NULL,
+  `old_pid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_tgbz
+-- ----------------------------
+INSERT INTO `rrhbt2t8888_tgbz` VALUES ('2', '1', '1', '1', '400', '1', 'niuniu', '0', 'admin@qq.com', '2017-02-15 11:51:28', 'BC金融', '1', '0', null, '1', '0', null, '0');
+INSERT INTO `rrhbt2t8888_tgbz` VALUES ('3', '1', '1', '1', '600', '1', 'niuniu', '1', 'admin@qq.com', '2017-02-15 11:54:21', 'BC金融', '1', '0', null, '1', '0', null, '0');
+INSERT INTO `rrhbt2t8888_tgbz` VALUES ('4', '1', '1', '1', '5000', '1', 'niuniu', '0', 'admin@qq.com', '2017-02-16 11:07:53', 'BC金融', '1', '0', null, '1', '0', null, '0');
+INSERT INTO `rrhbt2t8888_tgbz` VALUES ('5', '1', '1', '1', '500', '1', 'niuniu', '0', 'admin@qq.com', '2017-02-15 11:51:09', 'BC金融', '1', '0', null, '1', '0', null, '1');
+INSERT INTO `rrhbt2t8888_tgbz` VALUES ('6', '1', '1', '1', '100', '1', 'niuniu', '1', 'admin@qq.com', '2017-02-15 11:51:09', 'BC金融', '1', '0', null, '1', '0', null, '1');
+INSERT INTO `rrhbt2t8888_tgbz` VALUES ('7', '1', '1', '1', '400', '1', 'niuniu', '1', 'admin@qq.com', '2017-02-16 14:29:50', 'BC金融', '1', '0', null, '1', '0', null, '0');
+INSERT INTO `rrhbt2t8888_tgbz` VALUES ('9', '1', '1', '1', '300', '1', 'niuniu', '1', 'admin@qq.com', '2017-02-16 14:29:58', 'BC金融', '1', '0', null, '1', '0', null, '8');
+INSERT INTO `rrhbt2t8888_tgbz` VALUES ('10', '1', '1', '1', '300', '0', 'niuniu', '0', 'admin@qq.com', '2017-02-16 14:29:58', 'BC金融', '0', '0', null, '1', '0', null, '8');
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_tixian`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_tixian`;
+CREATE TABLE `rrhbt2t8888_tixian` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `UG_account` varchar(60) DEFAULT NULL,
+  `TX_money` decimal(15,0) DEFAULT '0',
+  `status` int(6) DEFAULT '0',
+  `addtime` datetime DEFAULT NULL,
+  `zffs` int(6) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_tixian
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_topup`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_topup`;
+CREATE TABLE `rrhbt2t8888_topup` (
+  `TU_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户订单表',
+  `TU_type` varchar(30) DEFAULT '' COMMENT '订单类型',
+  `TU_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `TU_revTime` datetime DEFAULT NULL COMMENT '状态修改时间',
+  `TU_userID` int(11) NOT NULL DEFAULT '0' COMMENT '用户ID',
+  `TU_money` float(11,2) DEFAULT '0.00' COMMENT '充值金额',
+  `TU_payment` varchar(30) DEFAULT '' COMMENT '充值方式',
+  `TU_userNote` varchar(250) DEFAULT '' COMMENT '会员留言',
+  `TU_adminNote` varchar(250) DEFAULT '' COMMENT '管理员备注',
+  `TU_status` tinyint(1) DEFAULT '0' COMMENT '到款状态',
+  PRIMARY KEY (`TU_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_topup
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_upfile`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_upfile`;
+CREATE TABLE `rrhbt2t8888_upfile` (
+  `UF_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `UF_time` datetime DEFAULT NULL,
+  `UF_type` varchar(25) DEFAULT NULL,
+  `UF_oldName` varchar(80) DEFAULT NULL,
+  `UF_name` varchar(50) DEFAULT NULL,
+  `UF_ext` varchar(10) DEFAULT NULL,
+  `UF_size` int(11) DEFAULT '0',
+  `UF_width` int(11) DEFAULT '0',
+  `UF_height` int(11) DEFAULT '0',
+  `UF_isThumb` smallint(6) DEFAULT '0',
+  `UF_thumbName` varchar(50) DEFAULT NULL,
+  `UF_useNum` mediumint(9) DEFAULT '0',
+  PRIMARY KEY (`UF_ID`),
+  UNIQUE KEY `UF_ID` (`UF_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_upfile
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_user`;
+CREATE TABLE `rrhbt2t8888_user` (
+  `UE_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商城用户注册登录表',
+  `UE_img` varchar(60) DEFAULT '' COMMENT '用户头像',
+  `UE_account` varchar(60) NOT NULL DEFAULT '' COMMENT '登录账号',
+  `UE_accName` varchar(60) DEFAULT NULL COMMENT '推荐人账号',
+  `sfjl` int(15) NOT NULL DEFAULT '0',
+  `zcr` varchar(60) NOT NULL,
+  `UE_Faccount` varchar(30) DEFAULT '0' COMMENT '父账号',
+  `UE_verMail` varchar(60) NOT NULL DEFAULT '' COMMENT '验证邮箱',
+  `UE_check` smallint(1) DEFAULT '0' COMMENT '是否验证，0-未验证，1-邮箱验证，2-手机验证',
+  `UE_actiCode` varchar(10) DEFAULT '' COMMENT '邮箱/手机验证激活码',
+  `UE_password` varchar(80) DEFAULT '' COMMENT '用户密码',
+  `UE_question` varchar(250) DEFAULT '' COMMENT '密码问题',
+  `UE_question2` varchar(255) DEFAULT NULL,
+  `UE_question3` varchar(255) DEFAULT NULL,
+  `UE_answer` varchar(100) DEFAULT '' COMMENT '密码答案',
+  `UE_answer3` varchar(100) DEFAULT NULL,
+  `UE_answer2` varchar(100) DEFAULT NULL,
+  `UE_regTime` datetime DEFAULT NULL COMMENT '注册时间',
+  `UE_regIP` varchar(60) DEFAULT '',
+  `UE_nowTime` datetime DEFAULT NULL COMMENT '当前登录时间',
+  `UE_nowIP` varchar(60) DEFAULT '' COMMENT '当前登录IP',
+  `UE_lastTime` datetime DEFAULT NULL COMMENT '最近一次登录时间',
+  `UE_lastIP` varchar(60) DEFAULT '' COMMENT '最近一次录陆IP',
+  `UE_logNum` int(11) DEFAULT '0' COMMENT '用户登录次数',
+  `UE_status` smallint(1) DEFAULT '1' COMMENT '用户状态，0-正常，1-禁用',
+  `UE_level` smallint(1) DEFAULT '0' COMMENT '会员等级',
+  `UE_note` text COMMENT '管理页备注信息',
+  `UE_integral` decimal(15,0) DEFAULT '0' COMMENT '当前账户积分余额',
+  `UE_money` decimal(15,0) DEFAULT '0' COMMENT '当前帐户余额',
+  `UE_sum` float(11,0) DEFAULT '0' COMMENT '当前账户总消费数',
+  `UE_info` text COMMENT '用户信息',
+  `UE_secpwd` varchar(80) DEFAULT NULL COMMENT '二级密码',
+  `UE_theme` varchar(60) DEFAULT '',
+  `UE_tjx` varchar(60) DEFAULT NULL COMMENT '推荐想总和',
+  `UE_ldx` varchar(60) DEFAULT NULL COMMENT '领导奖',
+  `UE_mailCheck` varchar(30) DEFAULT '0' COMMENT '邮箱验证0未验证，1验证了',
+  `UE_sfz` varchar(20) DEFAULT NULL COMMENT '生分证',
+  `UE_qq` varchar(20) DEFAULT NULL,
+  `UE_phone` varchar(20) DEFAULT NULL COMMENT '手机',
+  `UE_truename` varchar(60) DEFAULT NULL COMMENT '真实名字',
+  `UE_activeTime` datetime DEFAULT NULL COMMENT '激活时间',
+  `UE_stop` tinyint(2) DEFAULT '1' COMMENT '停止分红，0标志停止分红，1标志正常分红',
+  `UE_toActive` tinyint(2) DEFAULT '0' COMMENT '1表示已经被用过去激活新增帐号',
+  `UE_drpd` varchar(60) DEFAULT NULL,
+  `zbqx` int(5) NOT NULL DEFAULT '0' COMMENT '是否充许其它账号转币',
+  `zbzh` varchar(60) DEFAULT NULL,
+  `ybhe` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `zsbhe` decimal(15,4) NOT NULL DEFAULT '0.0000',
+  `email` varchar(60) DEFAULT NULL,
+  `jihuouser` varchar(60) NOT NULL,
+  `btbdz` varchar(60) NOT NULL DEFAULT '0',
+  `pin` varchar(255) DEFAULT NULL,
+  `mz` varchar(255) DEFAULT NULL,
+  `xin` varchar(255) DEFAULT NULL,
+  `weixin` varchar(255) DEFAULT NULL,
+  `lx_weixin` varchar(255) DEFAULT NULL,
+  `zfb` varchar(255) DEFAULT NULL,
+  `yhmc` varchar(255) DEFAULT NULL,
+  `zhxm` varchar(255) DEFAULT NULL,
+  `yhzh` varchar(255) DEFAULT NULL,
+  `tz_leiji` decimal(15,0) NOT NULL DEFAULT '0',
+  `date_leiji` datetime DEFAULT NULL,
+  `jl_he` decimal(15,0) NOT NULL DEFAULT '0',
+  `tj_he` decimal(15,0) NOT NULL DEFAULT '0',
+  `jl_he1` decimal(15,0) NOT NULL DEFAULT '0',
+  `tj_he1` decimal(15,0) NOT NULL DEFAULT '0',
+  `pp_user` varchar(255) DEFAULT NULL,
+  `tx_leiji` decimal(15,0) NOT NULL,
+  `tx_date` datetime DEFAULT NULL,
+  `tj_num` int(11) DEFAULT '0',
+  `levelname` varchar(20) DEFAULT '0',
+  `isNew` tinyint(1) DEFAULT '1',
+  `tdnode` int(11) DEFAULT '0' COMMENT '团队奖节点',
+  `dongjie` int(11) unsigned DEFAULT '0' COMMENT '冻结钱包',
+  PRIMARY KEY (`UE_ID`),
+  UNIQUE KEY `anme` (`UE_account`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_user
+-- ----------------------------
+INSERT INTO `rrhbt2t8888_user` VALUES ('32', '', 'niuniu', 'admin@qq.com', '0', 'admin@qq.com', '0', '', '1', '', 'e10adc3949ba59abbe56e057f20f883e', '', '', '', '', '', '', '2016-05-30 18:41:37', '59.51.60.10', '2016-05-30 19:16:41', '', null, null, '0', '0', '1', null, '0', '22607', '0', null, 'e10adc3949ba59abbe56e057f20f883e', 'BC金融', null, null, '0', '', '', '18889363060', '妞妞', '2017-02-20 17:31:12', '1', '0', null, '0', 'cc', '0.0000', '0.0000', '', '', '0', null, null, null, 'liqingbo27', null, 'mofanwo@foxmail.com', 'aa', null, 'bb', '22600', '2017-02-15 11:51:09', '0', '0', '0', '0', '778899', '0', null, '5', 'B1', '0', '1', '0');
+INSERT INTO `rrhbt2t8888_user` VALUES ('33', '', '778899', 'niuniu', '0', 'niuniu', '0', '', '1', '', 'e10adc3949ba59abbe56e057f20f883e', 'q1', null, null, '不知道', null, null, '2016-05-30 19:02:16', '59.51.60.10', '2016-07-07 09:32:56', '', null, null, '0', '0', '0', null, '0', '42700', '0', null, '5c67af1abce23ba41992576d94a3041b', '成成', null, null, '0', '', '', '13285087184', '成成', '2017-02-20 11:14:05', '1', '0', null, '0', null, '0.0000', '0.0000', '', '', '0', null, null, null, null, null, null, null, null, null, '0', null, '0', '0', '0', '0', 'niuniu', '0', null, '0', 'B0', '1', '1', '0');
+INSERT INTO `rrhbt2t8888_user` VALUES ('34', '', 'ab123456', 'niuniu', '0', 'niuniu', '0', '', '1', '', '5c67af1abce23ba41992576d94a3041b', 'q2', null, null, '不知道', null, null, '2016-05-30 19:11:57', '59.51.60.10', '2016-05-30 20:12:48', '', null, null, '0', '0', '1', null, '0', '0', '0', null, '5c67af1abce23ba41992576d94a3041b', '小白', null, null, '0', null, null, '17069882035', '小白', '2016-05-30 20:12:48', '1', '0', null, '0', null, '0.0000', '0.0000', null, '', '0', null, null, null, null, null, null, null, null, null, '50000', '2016-05-30 19:12:47', '0', '0', '0', '0', 'niuniu', '0', null, '2', 'B1', '0', '0', '0');
+INSERT INTO `rrhbt2t8888_user` VALUES ('35', '', 'wanggang', 'niuniu', '0', 'niuniu', '0', '', '1', '', 'e10adc3949ba59abbe56e057f20f883e', 'q1', null, null, '不知道', null, null, '2016-05-30 19:15:07', '59.51.60.10', '2016-05-30 19:15:32', '', null, null, '0', '0', '0', null, '0', '0', '0', null, 'e10adc3949ba59abbe56e057f20f883e', '成成大哥', null, null, '0', null, null, '15200555557', '成成大哥', null, '1', '0', null, '0', null, '0.0000', '0.0000', null, '', '0', null, null, null, null, null, null, null, null, null, '50000', '2016-05-30 19:15:39', '0', '0', '0', '0', 'niuniu', '0', null, '0', 'B0', '1', '1', '0');
+INSERT INTO `rrhbt2t8888_user` VALUES ('36', '', 'ab12345', 'ab123456', '0', 'ab123456', '0', '', '1', '', 'e10adc3949ba59abbe56e057f20f883e', 'q2', null, null, '不知道', null, null, '2016-05-30 19:16:16', '59.51.60.10', '2016-05-30 19:56:57', '', null, null, '0', '0', '1', null, '0', '0', '0', null, 'e10adc3949ba59abbe56e057f20f883e', '小胖', null, null, '0', '', '', '18684588806', '小胖', '2016-05-30 19:42:40', '1', '0', null, '0', null, '0.0000', '0.0000', '', '', '0', null, null, null, null, null, null, null, null, null, '100000', '2016-05-30 19:16:49', '0', '0', '0', '0', 'niuniu', '0', null, '1', 'B1', '0', '0', '0');
+INSERT INTO `rrhbt2t8888_user` VALUES ('37', '', 'ab1234', 'ab12345', '0', 'ab12345', '0', '', '1', '', '9cbf8a4dcb8e30682b927f352d6559a0', 'q3', null, null, '不知道', null, null, '2016-05-30 19:33:22', '59.51.60.10', '2016-05-30 23:55:07', '', null, null, '0', '0', '1', null, '0', '0', '0', null, '9cbf8a4dcb8e30682b927f352d6559a0', '小大大', null, null, '0', '', '', '17775619520', '小大大', null, '1', '0', null, '0', null, '0.0000', '0.0000', '', '', '0', null, null, null, null, null, null, null, null, null, '50000', '2016-05-30 19:33:47', '0', '0', '0', '0', 'niuniu', '0', null, '0', 'B1', '1', '0', '0');
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_useraddr`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_useraddr`;
+CREATE TABLE `rrhbt2t8888_useraddr` (
+  `UA_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户收货地址信息',
+  `UA_userID` int(11) DEFAULT '0' COMMENT '用户表ID',
+  `UA_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `UA_revTime` datetime DEFAULT NULL COMMENT '修改时间',
+  `UA_name` varchar(30) DEFAULT '' COMMENT '收货人姓名',
+  `UA_area` varchar(30) DEFAULT '' COMMENT '配送区域',
+  `UA_address` text COMMENT '其它地址信息',
+  `UA_contact` text COMMENT '联系方式信息',
+  `UA_note` text COMMENT '备注信息',
+  `UA_otherInfo` text COMMENT '其它相关信息',
+  PRIMARY KEY (`UA_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_useraddr
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_userget`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_userget`;
+CREATE TABLE `rrhbt2t8888_userget` (
+  `UG_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '商城用户注册登录表',
+  `UG_account` varchar(60) NOT NULL DEFAULT '' COMMENT '登录账号',
+  `UG_type` varchar(60) DEFAULT '' COMMENT '奖金分类',
+  `UG_integral` decimal(15,4) DEFAULT '0.0000' COMMENT '当前账户种子币余额',
+  `UG_money` varchar(255) DEFAULT '0.0000' COMMENT '当前帐户金币余额',
+  `UG_getTime` datetime DEFAULT NULL COMMENT '结算时间',
+  `UG_allGet` decimal(20,0) DEFAULT NULL COMMENT '用户密码',
+  `UG_balance` decimal(20,0) DEFAULT NULL COMMENT '当前账户余额',
+  `UG_regIP` varchar(30) DEFAULT '',
+  `UG_dataType` varchar(10) DEFAULT '' COMMENT '分红类型',
+  `UG_note` text COMMENT '金币获取说明',
+  `UG_othraccount` varchar(60) DEFAULT NULL COMMENT '推荐帐号/开单帐号',
+  `jsbzID` int(11) NOT NULL COMMENT '接收帮助表ID',
+  `yb` decimal(15,4) DEFAULT '0.0000',
+  `ybhe` decimal(15,4) DEFAULT NULL,
+  `zsb` decimal(15,4) DEFAULT NULL,
+  `zsbhe` decimal(15,4) DEFAULT NULL,
+  `yb1` decimal(15,4) DEFAULT NULL,
+  `zsb1` decimal(15,4) DEFAULT NULL,
+  `varid` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) DEFAULT '1' COMMENT '是否转出',
+  PRIMARY KEY (`UG_ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_userget
+-- ----------------------------
+INSERT INTO `rrhbt2t8888_userget` VALUES ('1', '778899', 'jb', '0.0000', '-5000', '2017-02-16 12:15:37', '50000', '45000', '', 'jsbz', '接受帮助扣款', null, '1', '0.0000', null, null, null, null, null, '0', '1');
+INSERT INTO `rrhbt2t8888_userget` VALUES ('2', '778899', 'jb', '0.0000', '-500', '2017-02-16 12:15:54', '45000', '44500', '', 'jsbz', '接受帮助扣款', null, '2', '0.0000', null, null, null, null, null, '0', '1');
+INSERT INTO `rrhbt2t8888_userget` VALUES ('3', '778899', 'jb', '0.0000', '-1000', '2017-02-16 12:16:02', '44500', '43500', '', 'jsbz', '接受帮助扣款', null, '3', '0.0000', null, null, null, null, null, '0', '1');
+INSERT INTO `rrhbt2t8888_userget` VALUES ('4', '778899', 'jb', '0.0000', '-800', '2017-02-16 12:22:37', '43500', '42700', '', 'jsbz', '接受帮助扣款', null, '6', '0.0000', null, null, null, null, null, '0', '1');
+INSERT INTO `rrhbt2t8888_userget` VALUES ('5', 'niuniu', 'jb', '0.0000', '+150', '2017-02-16 16:48:56', '22000', '22000', '', 'tgbz', '提供帮助本金加利息', null, '0', '0.0000', null, null, null, null, null, '1', '1');
+INSERT INTO `rrhbt2t8888_userget` VALUES ('6', 'niuniu', 'jb', '0.0000', '+1.5', '2017-02-16 16:48:57', '22150', '22152', '', 'tqjl', '提前2小时打款奖励', null, '0', '0.0000', null, null, null, null, null, '1', '1');
+INSERT INTO `rrhbt2t8888_userget` VALUES ('7', 'niuniu', 'jb', '0.0000', '+450', '2017-02-20 17:25:51', '22152', '22152', '', 'tgbz', '提供帮助本金加利息', null, '0', '0.0000', null, null, null, null, null, '3', '1');
+INSERT INTO `rrhbt2t8888_userget` VALUES ('8', 'niuniu', 'jb', '0.0000', '+4.5', '2017-02-20 17:25:51', '22602', '22607', '', 'tqjl', '提前2小时打款奖励', null, '0', '0.0000', null, null, null, null, null, '3', '1');
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_usergroup`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_usergroup`;
+CREATE TABLE `rrhbt2t8888_usergroup` (
+  `UG_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `UG_time` datetime DEFAULT NULL,
+  `UG_name` varchar(50) DEFAULT NULL,
+  `UG_rightStr` longtext,
+  `UG_note` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`UG_ID`),
+  KEY `UG_ID` (`UG_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_usergroup
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_userinfo`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_userinfo`;
+CREATE TABLE `rrhbt2t8888_userinfo` (
+  `UI_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户详细信息表',
+  `UI_userID` int(11) DEFAULT '0' COMMENT '用户表ID',
+  `UI_time` datetime DEFAULT NULL COMMENT '添加时间',
+  `UI_revTime` datetime DEFAULT NULL COMMENT '修改时间',
+  `UI_realName` varchar(30) DEFAULT '' COMMENT '真实姓名',
+  `UI_payaccount` varchar(30) DEFAULT NULL COMMENT '收款账号信息',
+  `UI_payStyle` varchar(10) DEFAULT NULL COMMENT '收款方式',
+  `UI_isindex` smallint(1) DEFAULT NULL COMMENT '是否设为默认',
+  `UI_opendress` varchar(30) DEFAULT NULL COMMENT '开户行',
+  PRIMARY KEY (`UI_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_userinfo
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_userjyinfo`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_userjyinfo`;
+CREATE TABLE `rrhbt2t8888_userjyinfo` (
+  `UJ_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户交易信息表',
+  `UJ_usercount` varchar(30) DEFAULT '0' COMMENT '用户表帐号',
+  `UJ_time` datetime DEFAULT NULL COMMENT '转出转入时间',
+  `UJ_addaccount` varchar(30) DEFAULT NULL COMMENT '转入账户',
+  `UJ_payaccount` varchar(30) DEFAULT NULL COMMENT '转出帐号信息',
+  `UJ_JBcount` decimal(15,4) DEFAULT NULL COMMENT '转账金币数量',
+  `UJ_note` text COMMENT '备注',
+  `UJ_style` varchar(10) DEFAULT NULL COMMENT '交易类型/转入/转出/担保交易',
+  `UJ_ip` varchar(30) DEFAULT '' COMMENT '真实姓名',
+  `UJ_balance` decimal(15,4) DEFAULT NULL,
+  `UJ_dataType` varchar(10) DEFAULT NULL COMMENT '交易类型',
+  `UJ_mymsg` tinyint(2) DEFAULT NULL COMMENT '消息读取状态0是读取，1是读取',
+  `UJ_sysReplay` text COMMENT '系统回复',
+  `UJ_jbqgStage` tinyint(2) DEFAULT '0' COMMENT '金币抢购状态，0是还没买走，1是被买走，等待付款，2是已经付款，等待卖家确认，3是交易完成',
+  `UJ_dbjbID` varchar(10) DEFAULT NULL COMMENT '抢购金币时会存取担保金币的ID',
+  `UJ_dbjyStage` tinyint(2) DEFAULT '0' COMMENT '担保交易状态0等待买家结束，1等待买家付款，2等待买家确认付款，3等待卖家确认收款',
+  `UJ_jbmcStage` tinyint(2) DEFAULT '0' COMMENT '金币卖出审核状态，0是还没通过。1是系统通过审核',
+  `lxfs` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`UJ_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_userjyinfo
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_userlevel`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_userlevel`;
+CREATE TABLE `rrhbt2t8888_userlevel` (
+  `UL_ID` int(11) NOT NULL AUTO_INCREMENT COMMENT '会员等级划分表',
+  `UL_theme` varchar(200) DEFAULT '' COMMENT '等级名称',
+  `UL_price` float(11,2) DEFAULT '0.00' COMMENT '消费金额',
+  `UL_cheap` float(11,2) DEFAULT '10.00' COMMENT '折扣',
+  `UL_time` datetime DEFAULT NULL COMMENT '添加时间',
+  PRIMARY KEY (`UL_ID`),
+  UNIQUE KEY `IM_ID` (`UL_ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_userlevel
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_user_jj`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_user_jj`;
+CREATE TABLE `rrhbt2t8888_user_jj` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(255) DEFAULT NULL,
+  `r_id` varchar(255) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `zt` int(8) NOT NULL DEFAULT '0',
+  `jb` decimal(15,0) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT '0',
+  `jiedong` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_user_jj
+-- ----------------------------
+INSERT INTO `rrhbt2t8888_user_jj` VALUES ('1', 'niuniu', '7', '2017-02-15 11:51:09', '提供帮助', '1', '150', '1', '0');
+INSERT INTO `rrhbt2t8888_user_jj` VALUES ('2', 'niuniu', '4', '2017-02-15 11:54:21', '提供帮助', '0', '900', '1', '0');
+INSERT INTO `rrhbt2t8888_user_jj` VALUES ('3', 'niuniu', '9', '2017-02-16 14:29:58', '提供帮助', '1', '450', '1', '1');
+INSERT INTO `rrhbt2t8888_user_jj` VALUES ('4', 'niuniu', '8', '2017-02-16 14:29:50', '提供帮助', '0', '600', '0', '0');
+INSERT INTO `rrhbt2t8888_user_jj` VALUES ('5', 'niuniu', '3', '2017-02-15 11:51:28', '提供帮助', '0', '600', '0', '0');
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_user_jl`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_user_jl`;
+CREATE TABLE `rrhbt2t8888_user_jl` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(255) DEFAULT NULL,
+  `r_id` int(15) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `zt` int(8) NOT NULL DEFAULT '1',
+  `jb` decimal(15,0) DEFAULT NULL,
+  `ds` varchar(255) DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `jj` decimal(10,0) DEFAULT NULL,
+  `leixin` int(8) NOT NULL DEFAULT '0',
+  `from` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_user_jl
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rrhbt2t8888_zsbyg_dd`
+-- ----------------------------
+DROP TABLE IF EXISTS `rrhbt2t8888_zsbyg_dd`;
+CREATE TABLE `rrhbt2t8888_zsbyg_dd` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(14) DEFAULT NULL COMMENT '提供帮助ID',
+  `gid` int(14) DEFAULT NULL COMMENT '接受帮助ID',
+  `puser` varchar(255) DEFAULT NULL,
+  `guser` varchar(255) DEFAULT NULL,
+  `gmfs` varchar(255) DEFAULT NULL,
+  `sj` varchar(255) DEFAULT NULL,
+  `shr` varchar(255) DEFAULT NULL,
+  `shdz` varchar(255) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `leixin` varchar(255) DEFAULT NULL,
+  `cpmc` varchar(255) DEFAULT NULL,
+  `sfzj` varchar(255) DEFAULT NULL,
+  `sffh` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rrhbt2t8888_zsbyg_dd
+-- ----------------------------
